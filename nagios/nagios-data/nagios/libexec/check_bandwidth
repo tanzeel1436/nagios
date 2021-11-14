@@ -1,0 +1,668 @@
+#!/usr/bin/perl -w
+
+# --------------------------------------------------------------------------------------------------
+# check_bandwidth3 3.0.0rc2
+#    ~ Nagios(r) SNMP Network Traffic Monitor Plugin
+#    ~ Copyright 2008, Jonathan Wright <jonathan (at) jabwebsolutions.co.uk>
+# --------------------------------------------------------------------------------------------------
+# This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+# General Public License as published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with this program; if not,
+# write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307
+# --------------------------------------------------------------------------------------------------
+# Note: Nagios is a registered trademark of Ethan Galstad. 
+
+# setup Perl
+use strict;
+use diagnostics;
+use warnings;
+
+# import modules
+use Net::SNMP;
+
+# --------------------------------------------------------------------------------------------------
+# define the variabes we're going to need and then fill them
+our (%_oid, %_status, %_options, $_cycle32, $_cycle64);
+
+# location of the programs we're going to use later
+%_oid = (
+  'sysDesc'       => ".1.3.6.1.2.1.1.1.0",       # generic system details
+  'ifNumber'      => ".1.3.6.1.2.1.2.1.0",       # number of interfaces
+  # for the following, append interface number to obtain value
+  'ifDescription' => '.1.3.6.1.2.1.2.2.1.2.',    # interface description
+  'ifType'        => '.1.3.6.1.2.1.2.2.1.3.',    # interface type
+  'ifSpeed'       => '.1.3.6.1.2.1.2.2.1.5.',    # interface bandwidth limit
+  'ifConnected'   => '.1.3.6.1.2.1.2.2.1.7.',    # interface up/down (physically)
+  'ifEnabled'     => '.1.3.6.1.2.1.2.2.1.8.',    # interface up/down (software)
+  'ifRX32'        => '.1.3.6.1.2.1.2.2.1.10.',   # interface bytes in (32-bit)
+  'ifTX32'        => '.1.3.6.1.2.1.2.2.1.16.',   # interface bytes out (32-bit)
+  'ifRX64'        => '.1.3.6.1.2.1.31.1.1.1.6.', # interface bytes in (64-bit)
+  'ifTX64'        => '.1.3.6.1.2.1.31.1.1.1.10.'  # interface bytes out (64-bit)
+);
+
+# status codes to return upon various conditions (as understood by Nagios(r))
+%_status   = (
+  'UNKNOWN'  => '-1', 'OK' => '0', 'WARNING' => '1', 'CRITICAL' => '2'
+);
+
+# command-line controlled options (set-up with default values)
+%_options = (
+  'version'       => '2',    'timeout'  => 15,
+  'warning'       => 75,     'critical' => 90,
+  'on-the-fly'    => 0,      'check-up' => 0,
+  'all-up'        => 0,      'pause'    => 10,
+  'use-bytes'     => 0,      'use-mega' => 0,
+  'default-speed' => 10000,  'override' => 0,
+  'down-warning'  => 0,      'reverse'  => 0
+);
+
+# set the location to save the temporary data to (based on Windows and anything else (MacOS, Linux
+#  & Unix all has /tmp) -- can be overriden later
+$_options{'save'} = ($^O =~ /^MSWin/ ? 'C:\Windows\Temp' : '/tmp/.traffic');
+$_options{'path'} = ($^O =~ /^MSWin/ ? '\\' : '/');
+
+# set $_active to 0 to initilise, and will be used to track that at last one interface is up
+our ($_active) = 0;
+
+# calculate the point at which the counter will cycle (based on 32-bit counter): if the interface
+#  supports 64-bit, it's unlikely to time out (will last for about 15 years on a 40Gbps port)
+$_cycle32 = ((2<<31)*2);
+$_cycle64 = ((2<<63)*2);
+
+# --------------------------------------------------------------------------------------------------
+# start the program by processing the command-line options, but first create a variable to hold the
+#  list of interfaces the program will need to check on (which from here will be known as devices
+#  for the hardware and interfaces for each port on the device to check)
+our (@devices);
+
+while (my $arg = shift) {
+  # test against known arguments, and assign variables based on them
+  if    ($arg =~ /^-(i|-interface)$/)      { &add_device(shift); }
+  elsif ($arg =~ /^-(t|-timeout)$/)        { $_options{'timeout'}        = shift;     }
+  elsif ($arg =~ /^-(p|-pause)$/)          { $_options{'pause'}          = shift;     }
+  elsif ($arg =~ /^-(o|-override)$/)       { $_options{'override'}       = shift;     }
+  elsif ($arg =~ /^-(f|-on-the-fly)$/)     { $_options{'on-the-fly'}     = 1;         }
+  elsif ($arg =~ /^-(u|-check-up)$/)       { $_options{'check-up'}       = 1;         }
+  elsif ($arg =~ /^-(d|-down-warning)$/)   { $_options{'down-warning'}   = 1;         }
+  elsif ($arg =~ /^-(a|-all-up)$/)         { $_options{'all-up'}         = 1;         }
+  elsif ($arg =~ /^-(w|-warning)$/)        { $_options{'warning'}        = uc(shift); }
+  elsif ($arg =~ /^-(c|-critical)$/)       { $_options{'critical'}       = uc(shift); }
+  elsif ($arg =~ /^-(b|-use-bytes)$/)      { $_options{'use-bytes'}      = 1;         }
+  elsif ($arg =~ /^-(m|-use-mega)$/)       { $_options{'use-mega'}       = 1;         }
+  elsif ($arg =~ /^-(r|-reverse)$/)        { $_options{'reverse'}        = 1;         }
+  elsif ($arg =~ /^-(s|-save)$/)           { $_options{'save'}           = shift;     }
+  elsif ($arg =~ /^-(h|-help)$/)           { __usage(1); }
+  else {
+    # if argument is unknown, then output error and exit
+    __issue('Unknown option: '.$arg);
+  }
+}
+
+# before we use the variables/options from the command line, we need to make
+#  sure they are in the correct format and are usable first
+__issue('No interface set - please add at least one using --interface') if scalar(@devices) eq 0;
+
+foreach my $key (keys %_options) {
+  if ($key eq 'warning' || $key eq 'critical') {
+    __issue('Invalid value given for --'.$key)
+      unless ($_options{$key} =~ /^[0-9]+[BKMGEP]?(,[0-9]+[BKMGEP]?)?$/);
+  }
+
+  if ($key eq 'override' || $key eq 'timeout' || $key eq 'pause') {
+    __issue('Invalid value given for --'.$key)
+      unless ($_options{$key} =~ /^[0-9]+$/);
+  }  
+}
+
+# --------------------------------------------------------------------------------------------------
+# first, create variable to hold bandwidth usage before we process each interface
+our (%bandwidth) = (
+  'rx'        => 0, # received data flow in bits/second
+  'tx'        => 0, # and for transmitted
+  'available' => ($_options{'override'} gt 0 ? $_options{'override'} : 0)
+                    # available bandwidth, which can be used to calculate %age usage
+                    # in the case of multiple interfaces, this is a cumulative value, like rx/tx
+);
+
+# check to make sure the save directory has been created (unless we're using --on-the-fly)
+unless ($_options{'on-the-fly'}) {
+  # check (and make) the main root directory for the storage
+  mkdir ($_options{'save'})
+    or __critical('Cannot create storage directory ('.$_options{'save'}.')')
+    unless (-e $_options{'save'});
+}
+
+# stepping through each interface provided, connect to the SNMP agent and get information about
+#  each requested interface.
+foreach my $device (@devices) {
+  my ($session, $error, $request);
+
+  # check how we need to connect to the device
+  if ($device->{'version'} eq 3) {
+    # connect to the SNMP agent using the v3 protocol with a username and password
+    ($session, $error) = Net::SNMP->session(
+      -hostname      => $device->{'hostname'},
+      -version       => $device->{'version'},
+      -username      => $device->{'username'},
+      -authpassword  => $device->{'password'}.
+      -port          => $device->{'port'},
+      -timeout       => $_options{'timeout'}
+    );
+  } else {
+    # connect to the SNMP agent using either v1 or v2c protocol using a community read string
+    ($session, $error) = Net::SNMP->session(
+      -hostname      => $device->{'hostname'},
+      -version       => $device->{'version'},
+      -community     => $device->{'community'},
+      -port          => $device->{'port'},
+      -timeout       => $_options{'timeout'}
+    );
+  }
+
+  # if we cannot get the sysDesc OID, assume that the attempt has failed
+  __critical('SNMP connection failed on '.$device->{'hostname'}.' with error: '.$error)
+    unless (defined($session));
+
+  # check we can now talk with the agent - failing if we cannot get the device's description
+  __critical('SNMP agent failure: '.$session->error())
+    unless (defined($request = $session->get_request(-varbindlist=>[$_oid{'sysDesc'}])));
+  
+  # create holders for the information we're about to process
+  our ($cache, %count, %recount);
+  our ($refetch) = '';
+  
+  # get the count for each interface provided
+  %count = fetch_interfaces($session, $device);
+
+  # run a check on the interface status first
+  foreach my $interface (keys %count) {
+    # check if the interface is down should --all-up be enabled
+    __down('Interface '.$interface.' on '.$device->{'hostname'}.' is '.$count{$interface}->{'connected'})
+      if ($_options{'all-up'} && $count{$interface}->{'connected'} ne 'active');
+    # otherwise just complete a general check, changing $_active if one is found up.
+    $_active = 1 if ($_active eq 0 && $count{$interface}->{'connected'} eq 'active');
+  }
+
+  # unless --on-the-fly is enabled, process each of the interfaces, locating and retrieving each of
+  #  their saved files to build up the historical bandwidth usage
+  unless($_options{'on-the-fly'}) {
+    # check (and make) the hostname directory for the interface files first
+    mkdir ($_options{'save'}.$_options{'path'}.$device->{'hostname'})
+      or __critical('Cannot create storage directory for '.$device->{'hostname'}.
+                    ' ('.$_options{'save'}.$_options{'path'}.$device->{'hostname'}.')')
+      unless (-e $_options{'save'}.$_options{'path'}.$device->{'hostname'});
+      
+    foreach my $interface (keys %count) {
+      # formuate the save path for the current interface
+      $cache = sprintf('%2$s%1$s%3$s%1$s%4$s',
+                 $_options{'path'}, $_options{'save'}, $device->{'hostname'}, $interface);
+      
+      # check that the file exists and we can open it (we won't throw an error if we cannot read)
+      if (-e $cache && open (CACHE, "< $cache")) {
+        # create hash to hold the data
+        my (%hash);
+        # read through the file
+        while (<CACHE>) {
+          # split each line and add it into the new hash
+          chomp; my ($key, $value) = split(':');
+          $hash{$key} = $value;
+        }
+        # close the file
+        close(CACHE);
+
+        unless (
+          # make sure we have values for speed, rx and tx
+          (($hash{'speed'} > 0) && defined($hash{'rx'}) && defined($hash{'tx'})) &&
+          # if the port isn't 64bit enabled, make sure the amount time difference between now and
+          # the cached data isn't greater than the time it takes for the counter to wrap around
+          # ensuring a true value (if it is greater, we'll add it to the refetch variable
+          ($count{$interface}->{'64bit'}||((time-$hash{'timestamp'})<($_cycle32/($hash{'speed'}/8))))
+        ) {
+          # if any of the above checks fail, then we'll need to refetch the interface's values
+          $refetch = ($refetch eq '' ? '' : ',').$interface;
+        } else {
+          # otherwise the data is fine, so calcuate usage and add to the bandwidth
+          $bandwidth{'rx'} += 8*((($count{$interface}->{'rx'}
+                               + ($count{$interface}->{'rx'} < $hash{'rx'} ?
+                                 ($count{$interface}->{'64bit'} ? $_cycle64 : $_cycle32) : 0))
+                               - $hash{'rx'}) / 
+                                 ($count{$interface}->{'timestamp'}-$hash{'timestamp'}));
+          $bandwidth{'tx'} += 8*((($count{$interface}->{'tx'}
+                               + ($count{$interface}->{'tx'} < $hash{'tx'} ?
+                                 ($count{$interface}->{'64bit'} ? $_cycle64 : $_cycle32) : 0))
+                               - $hash{'tx'}) / 
+                                 ($count{$interface}->{'timestamp'}-$hash{'timestamp'}));
+          $bandwidth{'available'} += $count{$interface}->{'speed'} unless ($_options{'override'} gt 0);
+
+          # now save the current version of the data back to the cache file for later lookup so long
+          #  as on-the-fly hasn't been enabled
+          unless ($_options{'on-the-fly'}) {
+            open (CACHE, "> $cache") or
+              __critical('Cannot open cache file for writing ('.$cache.')');
+            # save only the information we need back to the file
+            print CACHE
+              "timestamp:".$count{$interface}->{'timestamp'}."\n".
+              "speed:".$count{$interface}->{'speed'}."\n".
+              "tx:".$count{$interface}->{'tx'}."\n".
+              "rx:".$count{$interface}->{'rx'};
+            # and close it
+            close(CACHE);
+          }
+        }
+      } else {
+        # as the cache file doesn't exist, we'll need to refetch the values for this interface
+        $refetch .= ($refetch eq '' ? '' : ',').$interface;
+      }
+    }
+
+    # now save the refetch information into the device's hash    
+    $device->{'refetch'} = $refetch;
+  }
+  
+  # now go through re-fetching the data from the device - if we're running with on-the-fly, it will
+  #  of course be everything, but in the case of failed cache lookups, we need to change for any
+  #  refetch requests first.
+  if ($_options{'on-the-fly'} || $device->{'refetch'} ne "") {
+    # first, sleep
+    sleep($_options{'pause'});
+    
+    # and then re-fetch the data
+    %recount = fetch_interfaces($session, $device);
+    foreach my $interface (keys %recount) {
+      $bandwidth{'rx'} += 8*((($recount{$interface}->{'rx'}
+                           + ($recount{$interface}->{'rx'} < $count{$interface}->{'rx'} ?
+                             ($recount{$interface}->{'64bit'} ? $_cycle64 : $_cycle32) : 0))
+                           - $count{$interface}->{'rx'}) /
+                             ($recount{$interface}->{'timestamp'}-$count{$interface}->{'timestamp'})
+                          );
+      $bandwidth{'tx'} += 8*((($recount{$interface}->{'tx'}
+                           + ($recount{$interface}->{'tx'} < $count{$interface}->{'tx'} ?
+                             ($recount{$interface}->{'64bit'} ? $_cycle64 : $_cycle32) : 0))
+                           - $count{$interface}->{'tx'}) /
+                             ($recount{$interface}->{'timestamp'}-$count{$interface}->{'timestamp'})
+                          );
+      $bandwidth{'available'} += $recount{$interface}->{'speed'} unless ($_options{'override'} gt 0);
+
+      # formuate the save path for the current interface
+      $cache = sprintf('%2$s%1$s%3$s%1$s%4$s',
+                 $_options{'path'}, $_options{'save'}, $device->{'hostname'}, $interface);
+      
+      # now save the current version of the data back to the cache file for later lookup so long
+      #  as on-the-fly hasn't been enabled
+      unless ($_options{'on-the-fly'}) {
+        open (CACHE, "> $cache") or
+          __critical('Cannot open cache file for writing ('.$cache.')');
+        # save only the information we need back to the file
+        print CACHE
+          "timestamp:".$count{$interface}->{'timestamp'}."\n".
+          "speed:".$count{$interface}->{'speed'}."\n".
+          "tx:".$count{$interface}->{'tx'}."\n".
+          "rx:".$count{$interface}->{'rx'};
+        # and close it
+        close(CACHE);
+      }
+    }
+  }
+  
+  # close the SNMP connection, as we no longer need it
+  $session->close();
+}
+
+# now we've processed every device and read every interface, check $_active
+__down('No interface active interface has been found') unless ($_active);
+
+# if --reverse is enabled, swap tx and rx;
+($bandwidth{'tx'}, $bandwidth{'rx'}) = ($bandwidth{'rx'}, $bandwidth{'tx'})
+  if ($_options{'reverse'});
+
+# --------------------------------------------------------------------------------------------------
+# register variables we're going to use in the next section
+our($report, $status, %levels, %limits);
+
+# now we're going to test the values calculated against the warning and critical limits given, and
+#  therefore work out which status should be reported to Naguis. To minimise duplication of code,
+#  we'll create a hash table with the keys as the levels, pointing to the de-referenced sub-routines
+#  which will report the status back to Nagios(r)
+%levels = (
+  # start with CRITICAL first, as it's higher than WARNING and can be 
+  #  triggered, even if WARNING has a higher trigger than CRITICAL
+  'critical' => \&__critical,
+  'warning'  => \&__warning
+);
+
+# breakdown the limits into the tx/rx valus, checking if we have two separate
+#  values for the limits on each type
+foreach my $key (keys %levels) {
+   # yep, so split
+  ($limits{$key}{'tx'}, $limits{$key}{'rx'}) = 
+    ($_options{$key} =~ /^[0-9]+[BKMGEP]?,[0-9]+[BKMGEP]?$/ ?
+     split(',', $_options{$key}) : ($_options{$key}, $_options{$key}));
+
+  # if the values have no suffix (i.e. K, M or G), then they're going to be
+  #  %age values - re-set the limit values to %age of available bandwidth
+  $limits{$key}{'tx'} = $bandwidth{'available'}*($limits{$key}{'tx'}/100)
+    if ($limits{$key}{'tx'} =~ /^[0-9]+$/);
+  $limits{$key}{'rx'} = $bandwidth{'available'}*($limits{$key}{'rx'}/100)
+    if ($limits{$key}{'rx'} =~ /^[0-9]+$/);
+}
+
+# create the text report which we're going to send back to Nagios(r) (and can be
+#  read by the admin via the site or via a notice)
+$report = sprintf(
+  # Nagios(r) Plugin Report: 'Status Information|Performance Data'
+  'Out: %1$sps; In: %3$sps|out=%2$s;%5$s;%7$s;0;%9$s in=%4$s;%6$s;%8$s;0;%9$s',
+  __adjust($bandwidth{'tx'}), $bandwidth{'tx'},  # 1,2
+  __adjust($bandwidth{'rx'}), $bandwidth{'rx'},  # 3,4
+  __convert_limit($limits{'warning'}{'tx'}),     # 5
+  __convert_limit($limits{'warning'}{'rx'}),     # 6
+  __convert_limit($limits{'critical'}{'tx'}),    # 7
+  __convert_limit($limits{'critical'}{'rx'}),    # 8
+  $bandwidth{'available'}                        # 9
+);
+
+# process each level, and break down the limits into their tx/rx values so we
+#  can test them against the 
+foreach my $key (keys %levels) {
+  # run tests against each of the tx and rx values, triggering the
+  #  de-referenced sub-routine if either of them trigger
+  $levels{$key}($report)
+    if (__test($limits{$key}{'tx'}, $bandwidth{'tx'}) or
+        __test($limits{$key}{'rx'}, $bandwidth{'rx'}));
+}
+
+# if we've reached this stage, no errors have been triggered and so
+#  it's safe to report that everything is OK. Return information and exit
+#  with OK status value.
+print 'OK '.$report;
+exit($_status{'OK'});
+
+# --------------------------------------------------------------------------------------------------
+# check the interface option is in the correct format and then process into the interfaces array
+sub add_device() {
+  # get details of the device to check
+  my ($device) = shift;
+  
+  # [version://][username[:password]@]hostname[:port]/[community:]interface[,interface]
+  if ($device =~ m/(v([123])?:\/\/)?((\w+)(:(\w+))?@)?([a-zA-Z0-9\.\-_]+)(:(\d+))?\/(([\S]+):)?((\d+,?)+)/) {
+    # convert the string into a hash-format and then append to @devices
+    my (%hash) = (
+      'device'    => $device,
+      'username'  => (defined $4 ? $4 : ''),
+      'password'  => (defined $6 ? $6 : ''),
+      'version'   => (defined $2 ? $2 : 1),
+      'community' => (defined $11 ? $11 : 'public'),
+      'hostname'  => lc($7),
+      'port'      => (defined $9 ? $9 : 161),
+      'interface' => $12
+    );
+
+    # check for v3 connections that we have a username (password should be OK blank)    
+    __issue('Cannot connect to '.$hash{'hostname'}.': No username (and password) given for v3 agent')
+      if ($hash{'version'} eq 3 and $hash{'username'} eq '');
+
+    # add the device to the array
+    push(@devices, \%hash);
+  } else {
+    # if the format doesn't match the regular expression, we need to fail as it cannot be tested
+    __issue('--interface option is not in correct syntax. Please check & try again');
+  }  
+}  
+
+# run the SNMP query to get the tx/rx data from the interface on the device
+sub fetch_interfaces {
+  # create variables required
+  my (@interfaces, @list, $request, %return);
+  # get the Net::SNMP session and interface details
+  my ($session, $device) = (shift, shift);
+  
+  # prepare the list of OID numbers for the interface - this can now include more than one
+  #  port on a device - however, check if the refetch option exists, and use that instead and
+  #  ensure all numbers are unique
+  my (%seen) = ();
+  @interfaces = grep { !$seen{$_}++ } sort(split(',', (defined($device->{'refetch'}) ?
+                  $device->{'refetch'} : $device->{'interface'})));
+  
+  foreach my $interface (@interfaces) {
+
+    # push each OID onto @list, which will then be passed onto the SNMP agent
+    push(@list, $_oid{'ifDescription'}.$interface);  # interface name
+    push(@list, $_oid{'ifSpeed'}.$interface);        # interface speed
+    push(@list, $_oid{'ifConnected'}.$interface);    # interface connected (up physically)
+    push(@list, $_oid{'ifEnabled'}.$interface);      # interface enabled (up in software)
+    push(@list, $_oid{'ifRX32'}.$interface);         # received bits (32bit)
+    push(@list, $_oid{'ifTX32'}.$interface);         # transmitted bits (32bit)
+    if ($device->{'version'} gt 1) {
+      push(@list, $_oid{'ifRX64'}.$interface);       # received bits (64bit)
+      push(@list, $_oid{'ifTX64'}.$interface);       # transmitted bits (64bit)
+    }
+  }
+
+  # run the SNMP query, and throw a CRITICAL error message if we can't get
+  #  any data back from the device
+  __critical('Count not communitate with SNMP agent: '.$session->error())
+    unless (defined($request = $session->get_request(-varbindlist=>[@list])));
+
+  # run through each of the  interfaces and process the returned details from the SNMP agent
+  foreach my $interface (@interfaces) {
+    # check to make sure that the interface is valid on the device before testing
+    __unknown('Interface '.$interface.' on '.$device->{'hostname'}.' is not valid')
+      if (# only check option 0 if --override hasn't been set
+          (!$_options{'override'} && $request->{$_oid{'ifSpeed'}.$interface} eq 'noSuchInstance') ||
+          # check the remaining options - all are required
+          $request->{$_oid{'ifDescription'}.$interface} eq 'noSuchInstance' ||
+          $request->{$_oid{'ifRX32'}.$interface} eq 'noSuchInstance' ||
+          $request->{$_oid{'ifTX32'}.$interface} eq 'noSuchInstance');
+
+    # convert the data returned into a more usable format for the rest of the program
+    my (%hash) = (
+        'timestamp' => time,
+        'name'      => $request->{$_oid{'ifDescription'}.$interface},
+        'speed'     => ($_options{'override'} ?
+                        $_options{'override'} : $request->{$_oid{'ifSpeed'}.$interface}),
+        'connected' => ($request->{$_oid{'ifEnabled'}.$interface} eq 1 ? ($request->{$_oid{'ifConnected'}.$interface} eq 1 ? 'active' : 'disconnected') : 'disabled'),
+        'tx'        => ($device->{'version'} gt 1 && $request->{$_oid{'ifTX64'}.$interface} gt 0 ? $request->{$_oid{'ifTX64'}.$interface} : $request->{$_oid{'ifTX32'}.$interface}),
+        'rx'        => ($device->{'version'} gt 1 && $request->{$_oid{'ifRX64'}.$interface} gt 0 ? $request->{$_oid{'ifRX64'}.$interface} : $request->{$_oid{'ifRX32'}.$interface}),
+        '64bit'     => ($device->{'version'} gt 1 && ($request->{$_oid{'ifRX64'}.$interface} gt 0 || $request->{$_oid{'ifTX64'}.$interface} gt 0) ? 1 : 0)
+    );
+
+    # now add the new data format into the return value
+    $return{$interface} = \%hash;
+  }
+
+  # return the hash with the details of the fetched interfaces
+  return %return;
+}
+
+# handle standard error message (due to incorrect configuration)
+sub __issue {
+  our ($message) = shift;
+  print "ERROR $message\n" unless ($message eq '');
+  __usage(0);
+}
+
+# handle interface down messages
+sub __down {
+  if ($_options{'down-warning'}) {
+    __warning(shift);
+  } else {
+    __critical(shift);
+  }
+}
+
+# handle warning error messages
+sub __warning {
+  # retrieve the error message and set a default if none given
+  #  before outputting and exiting
+  our ($message) = (($message = shift) eq '' ? 'No error message given' : $message);
+  print "WARNING $message\n";
+
+  # make sure any SNMP session has been closed and exit with WARNING status
+  exit($_status{'WARNING'});
+}
+
+# handle critical error messages
+sub __critical {
+  # retrieve the error message and set a default if none given
+  #  before outputting and exiting
+  our ($message) = (($message = shift) eq '' ? 'No error message given' : $message);
+  print "CRITICAL $message\n";
+
+  # make sure any SNMP session has been closed and exit with CRITICAL status
+  exit($_status{'CRITICAL'});
+}
+
+# handle unknown error messages
+sub __unknown {
+  # retrieve the error message and set a default if none given
+  #  before outputting and exiting
+  our ($message) = (($message = shift) eq '' ? 'No error message given' : $message);
+  print "UNKNOWN $message\n";
+
+  # make sure any SNMP session has been closed and exit with UNKNOWN status
+  exit($_status{'UNKNOWN'});
+}
+
+# --------------------------------------------------------------------------------------------------
+# program usage guidelines
+sub __usage {
+  # get and test to see if we need to display the full help output
+  my $full = (shift == 1 ? 1 : 0);
+
+  # output about and usage (depending on $full above)
+  print "check_bandwidth3 (v3.0.0rc2)\n Copyright 2008 Jonathan Wright <jonathan\@jabwebsolutions.co.uk>\n\n".
+    "Poll (via SNMP) one or more network ports (on one or more network devics)\n".
+    " and calculate bandwidth usage across all the ports\n\n"
+    if $full;
+  print "Usage: check_bandwidth3 --interface description\n".
+    "         [--timeout seconds] [--pause seconds] [--on-the-fly]\n".
+    "         [--override bits/sec] [--warning value] [--critical value]\n".
+    "         [--check-up [--down-warning]] [--use-bytes] [--use-mega]\n".
+    "         [--save location]\n";
+  print "       see --help for further information\n"
+    unless $full;
+  print "\nOptions:\n\n".
+    " -h, --help\n".
+    "    Display this help message\n\n".
+    " -i, --interface STRING\n".
+    "    Resource description of the interface(s) to be queried, in the format:\n\n".
+    "    [version://][user[:pass]@]host[:port]/[community:]interface[,interface]\n\n".
+    "    e.g v3://bwcheck:tester\@switch.example.com:161/10\n".
+    "     or v2://switch.example.com:1616/my-community:10,15\n".
+    "     or switch.example.com/10,11\n\n".
+    "    By default, connections will be over v2c, while the default community is \n".
+    "    (for v1 or v2 connections) 'public', and the default port number is 161.\n".
+    "    Each --interface option must have at least a hostname and interface number\n\n".
+    " -t, --timeout INTEGER             (default ".$_options{'timeout'}."s)\n".
+    "    Set the timeout value for communications with host via SNMP\n\n".
+    " -p, --pause INTEGER               (default ".$_options{'timeout'}."s)\n".
+    "    Set the length of the pause when calculating results on-the-fly\n".
+    "    (or between first checks when no cache value exists)\n\n".
+    " -o, --override INTEGER            (default ".($_options{'override'}?$_options{'override'}:'Off').")\n".
+    "    Override the maximum throughput available on selected port\n\n".
+    " -f, --on-the-fly                  (default ".($_options{'on-the-fly'}?'On':'Off').")\n".
+    "    Perform all calculation of bandwidth on-the-fly and don't use store\n\n".
+    " -u, --check-up                    (default ".($_options{'check-up'}?'On':'Off').")\n".
+    "    Check the switch port is Active (i.e. Enabled and Connected). If the port\n".
+    "    isn't, generate a CRITICAL response and exit\n\n".
+    " -d, --down-warning                (default ".($_options{'down-warning'}?'On':'Off').")\n".
+    "    Set --check-up to return a WARNING response instead of CRITICAL (will\n".
+    "    have no effect until --check-up enabled as well)\n\n".
+    " -a, --all-up                      (default ".($_options{'all-up'}?'On':'Off').")\n".
+    "    Normally, --check-up will only make sure that at least one of the interfaces\n".
+    "    across all the devices is up, and work out bandwidth usage based on that. If\n".
+    "    --all-up is enabled, every interface specified must be Active, or a CRITICAL\n".
+    "    (or WARNING with --down-warning) will be returned\n\n".
+    " -w, --warning INTEGER[,INTEGER]   (default ".$_options{'warning'}.($_options{'warning'} =~ /^[0-9]+[BKMGEP]$/ ? '' : '%').")\n".
+    "    Set the %age use of available bandwidth (taken from port speed, or \n".
+    "    --override above) at which to trigger a WARNING. Single value is for both\n".
+    "    Out & In - to specify different limits, use Out,In (If B,K,M,G,E or P is\n".
+    "    appended treat as absolute value in bits, or bytes with --use-bytes)\n\n".
+    " -c, --critical INTEGER[,INTEGER]  (default ".$_options{'critical'}.($_options{'critical'} =~ /^[0-9]+[BKMGEP]$/ ? '' : '%').")\n".
+    "    Value at which to trigger CRITICAL. Same syntax as --warning above\n\n".
+    " -b, --use-bytes                   (default ".($_options{'use-bytes'}?'On':'Off').")\n".
+    "    Use bytes instead of bits in all calculations (i.e. Megabytes not Megabits)\n\n".
+    " -m, --use-mega                    (default ".($_options{'use-mega'}?'On':'Off').")\n".
+    "    Force use of Megabit/Megabyte in all output (don't use Kilo or Giga)\n\n".
+    " -r, --reverse                     (default ".($_options{'reverse'}?'On':'Off').")\n".
+    "    Swap In/Out values, so they are relative to the device connected to the\n".
+    "    interface, not the interface itself (this will only affect the values\n".
+    "    retrived from the interface, not the --warning or --critical values).\n\n".
+    " -s, --save                        (default '".$_options{'save'}."')\n".
+    "    Change the location where the cache files are saved.\n\n"
+   if $full;
+
+  exit($_status{'UNKNOWN'});
+}
+
+sub __adjust {
+  # register the variables we're going to need
+  our ($value, $ext);
+
+  # get the value we're going to report (and convert it into bytes if
+  #  requested by the --bytes command-line argument)
+  $value = ($_options{'use-bytes'} ? (shift)/8 : shift);
+  # set $ext to the default of 'bytes' (i.e. 'b')
+  # $ext = 'b';
+  $ext = '';
+
+  # if the --use-mega command-line option has been supplied, force all
+  #  conversion to multipuls of megabyte or megabit.
+  if ($_options{'use-mega'}) {
+    $value = ($value/(1024*1024));
+    $ext   = 'M';
+
+  # otherwise keep diving by 1024 while we still have suffixes available,
+  #  until we have a human-readable number (i.e. between 1 and 1024)
+  } else {
+    my (@exts) = qw(K M G E P);
+    while ($value > 1024 && scalar @exts > 0) {
+      $value = ($value/1024);
+      $ext = shift @exts;
+    }
+  }
+
+  # return the value, formatting to 2 decimal places and correct termonology
+  #  for bits and bytes
+  return sprintf('%0.2f%s', $value, $ext.($_options{'use-bytes'} ? 'B' : 'b'));
+}
+
+# take the value and the limit and compare so see if we've passed it
+sub __test {
+  # register the variables we're going to need
+  our($limit, $multi, $value);
+
+  # get the supplied limit
+  $limit = shift;
+
+  # get the value we're going to report (and convert it into bytes if
+  #  requested by the --bytes command-line argument)
+  $value = ($_options{'use-bytes'} ? (shift)/8 : shift);
+
+  # test the value against the limit - only return true of the value has
+  #  passed the limit
+  return ($value > __convert_limit($limit));
+}
+
+sub __convert_limit {
+  our ($limit) = shift;
+  # if the limit has a suffex, it not yet an absolute value which can be
+  #  compared - convert it back to bits based on the suffix
+  if ($limit =~ /^[0-9]+[BKMGEP]$/) {
+    # get the suffix
+    our($multi) = chop($limit);
+    # and do the calculation
+    if    ($multi eq 'K') { $limit = $limit*(1024);    }
+    elsif ($multi eq 'M') { $limit = $limit*(1024**2); }
+    elsif ($multi eq 'G') { $limit = $limit*(1024**3); }
+    elsif ($multi eq 'E') { $limit = $limit*(1024**4); }
+    elsif ($multi eq 'P') { $limit = $limit*(1024**5); }
+  }
+
+  return $limit;
+}

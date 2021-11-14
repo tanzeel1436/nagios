@@ -1,0 +1,176 @@
+#!/usr/bin/env python
+#
+# Copyright (C) 2006 Ezio Vernacotola <ezio@uptime.it>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+"""
+Nagios plugin to check the status of zaptel devices, mainly used in
+asterisk pbxs
+
+Usage:
+
+check_zaptel [-v] -s spanno [-s spanno ...]
+
+example:
+
+check_zaptel -s1 -s2 -s3 -s4
+
+
+
+CHANGES
+
+2006-10-22 version 0.9.1:
+reports error if zaptel is not loaded
+
+2006-06-07 version 0.9:
+initial release
+            
+"""
+
+
+import sys
+import os
+from optparse import OptionParser
+import re
+
+status_msg = ['OK', 'Warning', 'Critical', 'Unknown']
+
+
+class NagiosPlugin:
+    """Nagios plugin superclass"""
+
+    service = None
+
+    def __init__(self):
+        self.status = None
+        self.info = None
+        self.verbose = 0
+        
+    def check(self):
+        self.status = 3
+        self.info = ''
+        
+    def printstatus(self):
+        print '%s %s: %s' % (self.service, status_msg[self.status], self.info)
+        
+    
+    
+class ZaptelNagiosPlugin(NagiosPlugin):
+    """Zaptel Nagios plugin class"""
+
+    service = 'ZAPTEL'
+    
+    def __init__(self):
+        self.spans = []
+        
+    def check_span(self, span):
+        """check the status of a span"""
+        
+        procfn = '/proc/zaptel/%d' % span
+        if not os.path.isfile(procfn):
+            return ('NO SPAN', '', 'Span: %s' %span, 'Span: %s' % span, 'Span: %d No such file or directory: %s' % (span, procfn))
+        zapst = file('/proc/zaptel/%d' % span)
+        firstline = zapst.readline().strip()
+        
+        spanre = 'Span (?P<spno>\d+): (?P<spname>\S+) "(?P<descr>.+)" ?(?P<lineconf>\S*) ?(?P<rest>.*)'
+        m = re.compile(spanre).match(firstline)
+        rest = m.group('rest')
+        restflds = rest.split()
+        
+        alarm = ''
+        warning = ''
+        
+        for rfld in restflds:
+            if rfld in ['BLUE', 'YELLOW', 'RED']:                   # error
+                alarm = rfld
+                break
+            elif rfld in ['NOTOPEN', 'RECOVERING', 'LOOPBACK']:     # warning
+                warning = rfld
+            else:
+                pass                                                # ci frega poco
+        
+        return (alarm, warning, m.group('spname'), m.group('descr'), firstline)
+        
+
+    def check(self):
+        """execute the checks requested"""
+    
+        warnings = 0
+        errors = 0
+        exceptions = 0
+        msg = []
+        
+        for sp in self.spans:
+            try:
+                alarm, warning, spname, descr, firstline = self.check_span(int(sp))
+            except Exception, E:
+                alarm, warning, spname, descr, firstline = '', '', str(E), str(E), str(E)
+                exceptions += 1
+                
+            if alarm:
+                errors += 1
+            if warning:
+                warnings += 1
+                
+            if self.verbose == 0:
+                if alarm:
+                    msg.append(spname + ' ' + alarm)
+                else:
+                    msg.append(spname)
+            elif self.verbose == 1:
+                if alarm:
+                    msg.append(descr + ' ' + alarm)
+                else:
+                    msg.append(descr)
+            else:
+                msg.append(firstline)
+
+        if exceptions > 0:
+            self.status = 3
+        elif errors > 0:
+            self.status = 2
+        elif warnings > 0:
+            self.status = 1
+        else:
+            self.status = 0
+                
+        self.info = ', '.join(msg)
+ 
+  
+    
+def main():
+
+    uso = "%prog [options]"
+    opt = OptionParser(uso)
+    opt.set_defaults(verbose=0)
+    opt.add_option('-v', '--verbose', dest="verbose", action="count" )
+    opt.add_option('-s',  dest="span", action="append", help="span number (multiple allowed)")
+
+    (options, args) = opt.parse_args()
+    
+    if not options.span:
+        opt.error('No span specified!')
+
+    CheckZap = ZaptelNagiosPlugin()
+    CheckZap.verbose = options.verbose
+    CheckZap.spans = options.span
+    CheckZap.check()
+    CheckZap.printstatus()
+    sys.exit(CheckZap.status)
+    
+    
+main() 

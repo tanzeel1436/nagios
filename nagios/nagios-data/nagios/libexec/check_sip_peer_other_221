@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Asterisk SIP Peer Check.
+# Modified by Tanzeel Iqbal <tanzeel_1436@hotmail.com>
+# sip:~# ./sip_check_peer mydesk
+# sip:~# ./sip_check_peer 2575
+# mydesk/461762501 62.80.200.53 5060 OK (10 ms)
+# 2575/461762590 41.80.200.53 5060 OK (15 ms)
+# sip:~#
+#
+#
+
+if [ $# == 0 -o "$1" == "-h" -o  $# -gt 1 ]; then
+        echo "Usage: $0"
+        exit 3
+fi
+
+LINE=`/usr/bin/ssh root@10.174.5.221 'asterisk -rx "sip show peers"' | grep $1 | grep "5060     OK ("`
+
+#
+# This is a uggly. Just to check that the expression above does not match more
+# then one line.
+#
+HITS=`/usr/bin/ssh root@10.174.5.221 'asterisk -rx "sip show peers"' | grep $1 | grep "5060     OK (" | wc -l`
+
+if [ $HITS -gt 1 ]; then
+        echo "ERROR: Multiple match, tweak your arguments or fix $0  "
+        exit 3
+fi
+
+if [ "$LINE" ]; then
+        echo -n "OK: "
+        echo -n $LINE
+        #Create perdata
+        echo -n "|time="
+        echo $LINE | awk '{gsub(/\(/,"")};{gsub(/\)/,"")};{print $(NF-1)$NF}'
+        exit 0
+elif [ -z "$LINE" ]; then
+        echo "CRITICAL: Extension $1 not registering";
+        exit 2
+else
+        echo $LINE
+        exit 2
+fi

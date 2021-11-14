@@ -1,0 +1,4 @@
+#!/bin/bash
+#mtr -rw 10.114.5.2 | awk '{print $5}' > /tmp/hops
+mtr -c 1 -r 10.30.5.2
+exit

@@ -1,0 +1,31 @@
+#! /bin/sh
+
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+STATE_DEPENDENT=4
+mysqlpath='/usr/bin'
+crit="No"
+null="NULL"
+ok="Yes"
+
+
+
+$read= `/usr/sbin/asterisk -rx "sip show peer $ext" | tail -40 | grep Addr`;
+
+if [ $read =~ /: 10./]; then
+echo OK "$state: $read\n";
+exit $STATE_OK;}
+fi
+
+if [ $read =~ /: 0.0.0.0/]; then
+echo CRITICAL - $read\n
+exit $STATE_CRITICAL;
+fi
+
+if  [ $read =~ /:   No peer/]; then
+        $state = 'WARNING';
+echo "$state: $read\n";
+exit $STATE_UNKNOWN;
+fi

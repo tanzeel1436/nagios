@@ -1,0 +1,27 @@
+version: '3.1'
+services:
+  nagios:
+    container_name: nagios
+    image: nagios
+    #build: . 
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nagios-data/nagios/etc:/usr/local/nagios/etc
+      - ./nagios-data/nagios/var:/usr/local/nagios/var
+      - ./nagios-data/nagios/libexec:/usr/local/nagios/libexec
+      - ./nagios-data/pnp4nagios/var:/usr/local/pnp4nagios/var
+      - ./nagios-data/ssmtp:/etc/ssmtp
+      - ./nagios-data/ssl/finja.crt:/etc/pki/tls/certs/localhost.crt
+      - ./nagios-data/ssl/finja-key.key:/etc/pki/tls/private/localhost.key
+      - ./nagios-data/ssl/finja-Bundle.ca-bundle:/etc/pki/tls/certs/server-chain.crt
+    networks:
+      - nagios-docker
+networks:
+  nagios-docker:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.59.0.0/24
+

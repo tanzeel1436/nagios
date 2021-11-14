@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+#  Check saved file md5sum's against current md5sum's to
+#  monitor for changes in file content.
+#  Assumes that the /usr/local/nagios/md5s file has already been
+#  generated on the client for use with "md5sum -c FILE"
+#  
+#  To use add a new NRPE service that executes check_file_md5s
+#  and define the command in nrpe.cfg on the client
+#
+#  Author:  Stephen Berg, Jacobs Contractor, Naval Research Lab
+#           Stennis Space Center, MS
+current_md5s=`mktemp`
+saved_md5s=/usr/local/nagios/md5s
+
+STATE_OK=0
+STATE_WARNING=1
+STATE_CRITICAL=2
+STATE_UNKNOWN=3
+STATE_DEPENDENT=4
+
+/usr/bin/md5sum -c $saved_md5s > $current_md5s 2>&1
+
+file_count=`wc -l $saved_md5s | awk '{ print $1 }'`
+ok_count=`/bin/grep -c OK $current_md5s`
+failed_count=`/bin/grep -c FAILED $current_md5s`
+
+if [ $ok_count -eq $file_count ]
+then
+	echo "All monitored files (${ok_count}/${file_count}) are OK."
+	cat ${current_md5s}
+	sudo /bin/rm ${current_md5s}
+	exit $STATE_OK
+else
+	grep WARNING $current_md5s
+	grep FAILED $current_md5s
+	cat ${current_md5s} | grep OK
+	sudo /bin/rm ${current_md5s}
+	exit $STATE_WARNING
+fi

@@ -1,0 +1,113 @@
+#!/bin/bash
+#
+# Description:
+# This plugin determines whether the service and relevant UDP Port listening.
+# * Check the defined service are running
+# * Check the defined UDP Ports are listening
+# Created:      27.01.2013
+##################################################################################
+# You may have to change this, depending on where you installed your
+# Nagios plugins
+#
+# Processes to check
+PROCLIST_RED="heartbeat"
+PROCLIST_YELLOW=""
+
+# Ports to check
+PORTLIST="693"
+
+PATH="/usr/bin:/usr/sbin:/bin:/sbin"
+LIBEXEC="/usr/local/nagios/libexec"
+. $LIBEXEC/utils.sh
+
+################################################################################
+
+print_usage() {
+        echo "Usage: $PROGNAME"
+        echo "Usage: $PROGNAME --help"
+}
+
+print_help() {
+        echo ""
+        print_usage
+        echo ""
+        echo "System process and port monitor plugin for Nagios"
+        echo ""
+        echo "This plugin programed by Tanzeel Iqbal"
+        echo "You can e-mail at tanzeel_1436@hotmail.com for modifications and suggestions"
+        echo "Just add/modify entries "PROCLIST_RED" for "Critical" services and "PROCLIST_YELLOW" for "Warning" "
+        echo "and add/modify "PORTLIST" for any TCP/IP ports which you want to monitor. "
+        echo "For more info, review this file"
+}
+
+while test -n "$1"
+do
+        case "$1" in
+          --help) print_help; exit $STATE_OK;;
+          -h) print_help; exit $STATE_OK;;
+          *) print_usage; exit $STATE_UNKNOWN;;
+        esac
+done
+
+check_processes_red()
+{
+        PROCESS="0"
+        ERROR_PROCS=""
+        for PROC in `echo $PROCLIST_RED`; do
+        if [ `ps aux | grep $PROC | grep -v grep | wc -l` -lt 1 ]; then
+                        PROCESS=1
+                        ERROR_PROCS="$ERROR_PROCS""$PROC ";
+        fi
+        done
+
+        if [ $PROCESS -eq 1 ]; then
+                echo "SYSTEM CRITICAL - One or more processes ($ERROR_PROCS) not running"
+                exitstatus=$STATE_CRITICAL
+                exit $exitstatus
+        fi
+}
+
+check_processes_yellow()
+{
+        PROCESS="0"
+        WARNING_PROCS=""
+        for PROC in `echo $PROCLIST_YELLOW`; do
+        if [ `ps aux | grep $PROC | grep -v grep | wc -l` -lt 1 ]; then
+                        PROCESS=1
+                        WARNING_PROCS="$ERROR_PROCS""$PROC ";
+        fi
+        done
+
+        if [ $PROCESS -eq 1 ]; then
+                echo "SYSTEM WARNING - One or more processes ($WARNING_PROCS) not running"
+                exitstatus=$STATE_WARNING
+                exit $exitstatus
+        fi
+}
+
+check_ports()
+{
+        PORTS="0"
+        ERROR_PORTS=""
+        for NUM in `echo $PORTLIST`; do
+                if [ `netstat -aun | grep $NUM | grep -v grep | wc -l` -lt 1 ];
+                        then PORTS=1;
+                        ERROR_PORTS="$ERROR_PORTS""$NUM ";
+                fi
+        done
+
+        if [ $PORTS -eq 1 ]; then
+                echo "SYSTEM: CRITICAL - One or more UDP ports ($ERROR_PORTS) not listening."
+                exitstatus=$STATE_CRITICAL
+                exit $exitstatus
+        fi
+}
+
+check_processes_red
+check_processes_yellow
+check_ports
+
+echo "SYSTEM: OK - LINUX High Availability service is running! Core Services: $PROCLIST_RED. Optional/Dependent Services: $PROCLIST_YELLOW. UDP Ports: $PORTLIST"
+exitstatus=$STATE_OK
+exit $exitstatus
+

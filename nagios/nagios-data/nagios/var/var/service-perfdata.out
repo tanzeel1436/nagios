@@ -1,0 +1,317 @@
+1634396524	ELK Server UAT 172.21.20.80	Apache CPU n MEM load	OK	1	HARD	0.631	0.687	OK /usr/sbin/httpd CPU: 0% MEM: 4.7% over 11 processes	proc=11 mem=4.7% cpu=0% rss=213372.0KB vsz=6413528.0KB
+1634396526	ELK Server UAT 172.21.20.80	Total Processes	OK	1	HARD	0.084	0.000	PROCS OK: 48 processes with STATE = RSZDT	procs=48;150;200;0;
+1634396524	TMS System 172.25.20.25	HD VAR/LOG Partition	CRITICAL	1	SOFT	3.015	0.000	Connection refused or timed out	
+1634396530	API-GW Server DR 172.23.20.35	Apache CPU n MEM load	OK	1	HARD	0.130	0.001	OK  CPU: 0.0% MEM: 0.0% over 0 processes	proc=0 mem=0.0% cpu=0.0% rss=0.0KB vsz=0.0KB
+1634396530	API-GW-MYSQL DR 172.23.20.65	MYSQL CPU and MEM Load	OK	1	HARD	0.152	0.001	OK /usr/sbin/mysqld CPU: .7% MEM: 80.2% over 1 processes	proc=1 mem=80.2% cpu=.7% rss=4771016.0KB vsz=9142508.0KB
+1634396531	BOP Server DR 172.23.20.62	HD Home Partition	OK	1	HARD	0.104	0.000	OK: /home: total 7.2GB, used 34.4MB (0.5%), free 6.8GB (94.1%)	used space=36102144B;6194285772;6968571494;0;7742857216 used space (pct.)=0.5%;80;90;0;100
+1634396531	API-GW-MYSQL UAT 172.21.20.65	Important TCP Services Status	OK	1	HARD	0.109	0.000	OK - All Services are running! sshd crond nrpe	
+1634396531	API-Server DR 172.23.20.82	HD VAR/LOG Partition	OK	1	HARD	0.113	0.000	OK: /var/log: total 10.7GB, used 93.7MB (0.9%), free 10.0GB (93.9%)	used space=98201600B;9186528460;10334844518;0;11483160576 used space (pct.)=0.9%;80;90;0;100
+1634396530	API-GW Server DR 172.23.20.35	TCP and UDP Connections	OK	1	HARD	1.121	0.001	SOCKET USAGE  OK : used 126	used=126;500;650 tcp=3 udp=3 raw=0
+1634396530	API-GW Server PROD 172.25.20.35	PING	CRITICAL	1	SOFT	2.032	0.001	CRITICAL - Host Unreachable (172.25.20.35)	
+1634396532	CDN-Server UAT Server 172.21.20.52	Total Processes	OK	1	HARD	0.088	0.001	PROCS OK: 46 processes with STATE = RSZDT	procs=46;150;200;0;
+1634396532	CDN-Server DR 172.23.20.77	Disk I/O	OK	1	HARD	1.110	0.000	DISK IO OK	sda2_read=0.00;100;150 sda2_write=1.00;70;100sdb_read=0.00;100;150 sdb_write=0.00;70;100sda1_read=0.00;100;150 sda1_write=0.00;70;100
+1634396531	API-GW-MYSQL PROD 172.25.20.65	HD Root Partition	CRITICAL	1	SOFT	3.014	0.000	Connection refused or timed out	
+1634396531	API-Server PROD 172.25.20.82	HD Root Partition	CRITICAL	1	SOFT	3.022	0.000	Connection refused or timed out	
+1634396534	Jenkins Server DR 172.23.20.21	Total Processes	OK	1	HARD	0.049	0.000	PROCS OK: 56 processes with STATE = RSZDT	procs=56;150;200;0;
+1634396534	MYSQL-DB Server DR 172.23.20.83	MySql - Slave SQL Running	CRITICAL	1	SOFT	0.058	0.000	CRITICAL - 172.23.20.83 - Slave_SQL_Running No	
+1634396533	DB Server UAT 172.21.20.60	TCP and UDP Connections	OK	1	HARD	1.170	0.000	SOCKET USAGE  OK : used 194	used=194;500;650 tcp=4 udp=3 raw=0
+1634396532	BOP Server PROD 172.25.20.62	HD Data Partition	CRITICAL	1	SOFT	3.014	0.000	Connection refused or timed out	
+1634396532	CDN-Server PROD 172.25.20.77	TCP and UDP Connections	CRITICAL	1	SOFT	3.013	0.000	Connection refused or timed out	
+1634396532	CDN-Server PROD 172.25.20.77	Check Traffic	CRITICAL	1	SOFT	3.015	0.000	Connection refused or timed out	
+1634396535	Mongo-DB Server DR 172.23.20.42	HD Home Partition	OK	1	HARD	0.117	0.004	OK: /home: total 7.2GB, used 33.6MB (0.5%), free 6.8GB (94.2%)	used space=35274752B;6194285772;6968571494;0;7742857216 used space (pct.)=0.5%;80;90;0;100
+1634396533	ELK Server UAT 172.21.20.80	CPU Stats	OK	1	HARD	2.138	0.000	CPU STATISTICS OK : user=0.00% system=0.50%, iowait=0.00%, idle=99.50%, nice=0.00%, steal=0.00%	CpuUser=0.00%;70;90;0; CpuSystem=0.50%;40;50;0; CpuIowait=0.00%;30;40;0; CpuIdle=99.50%;0;0;0; CpuNice=0.00%;0;0;0; CpuSteal=0.00%;0;0;0;
+1634396535	Middleware Server UAT 172.21.20.70	HD Root Partition	OK	1	HARD	0.169	0.003	OK: /: total 7.2GB, used 2.7GB (37.7%), free 4.1GB (56.9%)	used space=2918285312B;6194285772;6968571494;0;7742857216 used space (pct.)=37.7%;80;90;0;100
+1634396535	Nagios Server DR 172.23.20.50	HD Home Partition	CRITICAL	1	SOFT	1.016	0.004	Connection refused or timed out	
+1634396533	EMI-Widget-Server-Prod 172.25.20.71	Total Processes	CRITICAL	1	SOFT	3.020	0.000	Connection refused or timed out	
+1634396533	EMI-Widget-Server-Prod 172.25.20.71	Apache CPU n MEM load	CRITICAL	1	SOFT	3.019	0.000	Connection refused or timed out	
+1634396536	Payment-Switch-Srv-DR 172.23.20.85	HD VAR/LOG Partition	OK	1	HARD	0.109	0.000	OK: /var/log: total 10.7GB, used 1.4GB (13.5%), free 8.7GB (81.2%)	used space=1550766080B;9186528460;10334844518;0;11483160576 used space (pct.)=13.5%;80;90;0;100
+1634396536	API-GW-MYSQL UAT 172.21.20.65	HD Root Partition	OK	1	HARD	0.126	0.001	OK: /: total 40.1GB, used 4.3GB (10.7%), free 35.8GB (89.3%)	used space=4611715072B;34446930739;38752797081;0;43058663424 used space (pct.)=10.7%;80;90;0;100
+1634396536	Payment Switch Server- UAT 172.21.20.85	HD VAR/LOG Partition	OK	1	HARD	0.140	0.000	OK: /var/log: total 10.7GB, used 268.8MB (2.5%), free 9.9GB (92.3%)	used space=281829376B;9186528460;10334844518;0;11483160576 used space (pct.)=2.5%;80;90;0;100
+1634396534	IVR-Server-prod 172.25.20.44	Apache CPU and MEM Load	CRITICAL	1	SOFT	3.017	0.000	Connection refused or timed out	
+1634396534	IVR-Server-prod 172.25.20.44	Total Processes	CRITICAL	1	SOFT	3.016	0.000	Connection refused or timed out	
+1634396534	MYSQL-DB Server PROD 172.25.20.83	HD VAR/LOG Partition	CRITICAL	1	SOFT	3.016	0.000	Connection refused or timed out	
+1634396537	API-GW Server DR 172.23.20.35	Total Processes	OK	1	HARD	0.089	0.000	PROCS OK: 77 processes with STATE = RSZDT	procs=77;150;200;0;
+1634396537	Web Server UAT 172.21.20.40	HD VAR/WWW Partition	OK	1	HARD	0.170	0.000	OK: /var/www: total 9.7GB, used 36.0MB (0.4%), free 9.2GB (94.3%)	used space=37769216B;8347729920;9391196160;0;10434662400 used space (pct.)=0.4%;80;90;0;100
+1634396535	Mongo-DB Server PROD 172.25.20.42	HD Home Partition	CRITICAL	1	SOFT	3.021	0.004	Connection refused or timed out	
+1634396535	PBX-Server-Prod 172.25.20.74	HD Root Partition	CRITICAL	1	SOFT	3.030	0.004	Connection refused or timed out	
+1634396538	API-Server DR 172.23.20.82	HD VAR/LOG/AUDIT Partition	OK	1	HARD	0.116	0.001	OK: /var/log/audit: total 3.6GB, used 52.1MB (1.4%), free 3.4GB (93.0%)	used space=54640640B;3097119948;3484259942;0;3871399936 used space (pct.)=1.4%;80;90;0;100
+1634396538	API-GW-MYSQL DR 172.23.20.65	MYSQLD Performance	OK	1	HARD	0.153	0.001	MYSQL 8.0.23 OK	com_select=359471 com_update=1304598 com_insert=5493417 com_delete=0 max_used_connections=2 open_tables=387 opened_tables=552 questions=1438048 slow_queries=0 com_create_db=1 com_create_table=34 com_create_user=4 com_drop_table=0 com_grant=8
+1634396536	Payment-Switch-Srv-PROD 172.25.20.85	HD VAR Partition	CRITICAL	1	SOFT	3.019	0.000	Connection refused or timed out	
+1634396536	TMS System 172.25.20.25	HD VAR/LOG/AUDIT Partition	CRITICAL	1	SOFT	3.020	0.000	Connection refused or timed out	
+1634396537	API-GW Server DR 172.23.20.35	CPU Stats	OK	1	HARD	2.081	0.000	CPU STATISTICS OK : user=0.00% system=0.00%, iowait=0.00%, idle=100.00%, nice=0.00%, steal=0.00%	CpuUser=0.00%;70;90;0; CpuSystem=0.00%;40;50;0; CpuIowait=0.00%;30;40;0; CpuIdle=100.00%;0;0;0; CpuNice=0.00%;0;0;0; CpuSteal=0.00%;0;0;0;
+1634396539	CDN-Server DR 172.23.20.77	HD CDN Partition	OK	1	HARD	0.107	0.000	OK: /CDN: total 19.6GB, used 1.5GB (7.8%), free 17.0GB (87.0%)	used space=1634775040B;16796155904;18895675392;0;20995194880 used space (pct.)=7.8%;80;90;0;100
+1634396539	BOP Server DR 172.23.20.62	HD Root Partition	OK	1	HARD	0.118	0.000	OK: /: total 7.2GB, used 2.2GB (30.0%), free 4.7GB (64.6%)	used space=2326478848B;6194285772;6968571494;0;7742857216 used space (pct.)=30.0%;80;90;0;100
+1634396537	API-GW Server PROD 172.25.20.35	Swap plus RAM	CRITICAL	1	SOFT	3.019	0.000	Connection refused or timed out	
+1634396540	Windows DR 172.23.20.100	Uptime	OK	1	HARD	0.024	0.000	System Uptime - 166 day(s) 6 hour(s) 58 minute(s)	uptime=239458
+1634396538	API-GW-MYSQL PROD 172.25.20.65	HD TMP Partition	CRITICAL	1	SOFT	2.044	0.001	Connection refused or timed out	
+1634396538	API-Server PROD 172.25.20.82	HD TMP Partition	CRITICAL	1	SOFT	2.059	0.001	Connection refused or timed out	
+1634396540	DB Server UAT 172.21.20.60	Total Processes	OK	1	HARD	0.080	0.000	PROCS OK: 54 processes with STATE = RSZDT	procs=54;150;200;0;
+1634396540	ELK Server UAT 172.21.20.80	Check Traffic	OK	1	HARD	0.089	0.000	RX Bytes: 11GB, TX Bytes: 10GB: RX Speed:  3Kbps, TX Speed:  3Kbps: OK bandwidth utilization	rx=3199;104857600;117964800 tx=3376;104857600;117964800
+1634396540	DB Server UAT 172.21.20.60	Apache CPU n MEM load	OK	1	HARD	0.152	0.000	OK  CPU: 0.0% MEM: 0.0% over 0 processes	proc=0 mem=0.0% cpu=0.0% rss=0.0KB vsz=0.0KB
+1634396539	CDN-Server UAT Server 172.21.20.52	TCP and UDP Connections	OK	1	HARD	1.158	0.001	SOCKET USAGE  OK : used 255	used=255;500;650 tcp=9 udp=12 raw=0
+1634396539	CDN-Server PROD 172.25.20.77	Current Users	CRITICAL	1	SOFT	2.064	0.000	Connection refused or timed out	
+1634396539	BOP Server PROD 172.25.20.62	HD Home Partition	CRITICAL	1	SOFT	2.064	0.000	Connection refused or timed out	
+1634396539	CDN-Server PROD 172.25.20.77	Total Processes	CRITICAL	1	SOFT	2.065	0.000	Connection refused or timed out	
+1634396537	Windows Dev VM UAT 172.21.20.100	PING	OK	1	HARD	4.073	0.000	PING OK - Packet loss = 0%, RTA = 19.88 ms	rta=19.879000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396541	MYSQL-DB Server DR 172.23.20.83	MySql - Total Records Status	CRITICAL	1	SOFT	0.230	0.001	Master: 83519552 Slave: 56611160	
+1634396542	CDN-Server DR 172.23.20.77	Current Users	OK	1	HARD	0.035	0.000	USERS OK - 1 users currently logged in	users=1;5;10;0
+1634396538	API-GW-MYSQL UAT 172.21.20.65	PING	OK	1	HARD	4.039	0.001	PING OK - Packet loss = 0%, RTA = 20.63 ms	rta=20.628000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396540	EMI-Widget-Server-Prod 172.25.20.71	CPU Stats	CRITICAL	1	SOFT	2.057	0.000	Connection refused or timed out	
+1634396542	Mongo-DB Server DR 172.23.20.42	HD Root Partition	OK	1	HARD	0.119	0.000	OK: /: total 7.2GB, used 1.8GB (25.5%), free 5.0GB (69.1%)	used space=1971785728B;6194285772;6968571494;0;7742857216 used space (pct.)=25.5%;80;90;0;100
+1634396542	API-GW-MYSQL DR 172.23.20.65	Important TCP Services Status	OK	1	HARD	0.129	0.000	OK - All Services are running! sshd crond nrpe	
+1634396542	Middleware Server UAT 172.21.20.70	HD TMP Partition	OK	1	HARD	0.135	0.000	OK: /tmp: total 3.6GB, used 21.0MB (0.6%), free 3.4GB (93.8%)	used space=22028288B;3097119948;3484259942;0;3871399936 used space (pct.)=0.6%;80;90;0;100
+1634396542	Nagios Server DR 172.23.20.50	HD Root Partition	CRITICAL	1	SOFT	1.019	0.000	Connection refused or timed out	
+1634396541	GIT Server DR 172.23.20.22	CPU Stats	OK	1	HARD	2.069	0.001	CPU STATISTICS OK : user=5.51% system=1.00%, iowait=0.00%, idle=93.48%, nice=0.00%, steal=0.00%	CpuUser=5.51%;70;90;0; CpuSystem=1.00%;40;50;0; CpuIowait=0.00%;30;40;0; CpuIdle=93.48%;0;0;0; CpuNice=0.00%;0;0;0; CpuSteal=0.00%;0;0;0;
+1634396541	IVR-Server-prod 172.25.20.44	Asterisk CPU n MEM load	CRITICAL	1	SOFT	2.072	0.001	Connection refused or timed out	
+1634396541	MYSQL-DB Server DR 172.23.20.83	CPU Stats	OK	1	HARD	2.073	0.001	CPU STATISTICS OK : user=0.00% system=0.00%, iowait=0.00%, idle=100.00%, nice=0.00%, steal=0.00%	CpuUser=0.00%;70;90;0; CpuSystem=0.00%;40;50;0; CpuIowait=0.00%;30;40;0; CpuIdle=100.00%;0;0;0; CpuNice=0.00%;0;0;0; CpuSteal=0.00%;0;0;0;
+1634396541	Jenkins Server DR 172.23.20.21	CPU Stats	OK	1	HARD	2.081	0.001	CPU STATISTICS OK : user=1.50% system=1.75%, iowait=0.00%, idle=96.74%, nice=0.00%, steal=0.00%	CpuUser=1.50%;70;90;0; CpuSystem=1.75%;40;50;0; CpuIowait=0.00%;30;40;0; CpuIdle=96.74%;0;0;0; CpuNice=0.00%;0;0;0; CpuSteal=0.00%;0;0;0;
+1634396542	MYSQL-DB Server PROD 172.25.20.83	HD VAR/LOG/AUDIT Partition	CRITICAL	1	SOFT	1.086	0.000	Connection refused or timed out	
+1634396543	Payment-Switch-Srv-DR 172.23.20.85	HD VAR/LOG/AUDIT Partition	OK	1	HARD	0.108	0.000	OK: /var/log/audit: total 3.6GB, used 50.1MB (1.4%), free 3.4GB (93.0%)	used space=52518912B;3097119948;3484259942;0;3871399936 used space (pct.)=1.4%;80;90;0;100
+1634396543	Payment Switch Server- UAT 172.21.20.85	HD VAR/LOG/AUDIT Partition	OK	1	HARD	0.140	0.000	OK: /var/log/audit: total 3.6GB, used 46.9MB (1.3%), free 3.4GB (93.1%)	used space=49225728B;3097119948;3484259942;0;3871399936 used space (pct.)=1.3%;80;90;0;100
+1634396544	Windows Dev VM UAT 172.21.20.100	Uptime	OK	1	HARD	0.056	0.001	System Uptime - 43 day(s) 3 hour(s) 29 minute(s)	uptime=62129
+1634396544	API-GW Server DR 172.23.20.35	Check Traffic	OK	1	HARD	0.055	0.001	RX Bytes:  3GB, TX Bytes:  3GB: RX Speed:  4Kbps, TX Speed:  4Kbps: OK bandwidth utilization	rx=4000;104857600;117964800 tx=3979;104857600;117964800
+1634396543	PBX-Server-Prod 172.25.20.74	Important TCP Services Status	CRITICAL	1	SOFT	1.067	0.000	Connection refused or timed out	
+1634396542	Mongo-DB Server PROD 172.25.20.42	HD Root Partition	CRITICAL	1	SOFT	2.071	0.000	Connection refused or timed out	
+1634396544	Web Server UAT 172.21.20.40	HD emoney-demo Partition	OK	1	HARD	0.150	0.000	OK: /emoney-demo: total 7.2GB, used 4.0GB (56.0%), free 2.8GB (38.6%)	used space=4335337472B;6194357862;6968652595;0;7742947328 used space (pct.)=56.0%;80;90;0;100
+1634396545	API-GW-MYSQL DR 172.23.20.65	MySql - Slave IO Running	OK	1	HARD	0.053	0.001	OK - 172.23.20.65 - Slave_IO_Running Yes	
+1634396543	Payment-Switch-Srv-PROD 172.25.20.85	HD VAR/LOG Partition	CRITICAL	1	SOFT	2.059	0.000	Connection refused or timed out	
+1634396545	API-Server DR 172.23.20.82	Important TCP Services Status	OK	1	HARD	0.137	0.001	OK - All Services are running! sshd docker crond nrpe	
+1634396545	API-GW-MYSQL UAT 172.21.20.65	Swap plus RAM	OK	1	HARD	0.147	0.001	OK MEMORY:::: Total: 3791 MB - Used: 2824 MB - 74.50% used --- SWAP:::: Used: 201 MB - 2.46% used  :	USED=2961588224B;;;; TOTAL=3975495680B;;;; SWAP_USED=211492864B;;;; SWAP_TOTAL=8602513408B;;;; MEM_USED_PCT=74.50%;;;; SWAP_USED_PCT=2.46%;;;;
+1634396546	Windows DR 172.23.20.100	C:\ Drive Space	OK	1	HARD	0.019	0.000	c:\ - total: 49.66 Gb - used: 18.83 Gb (38%) - free 30.82 Gb (62%)	c:\ Used Space=18.83Gb;34.76;39.72;0.00;49.66
+1634396546	BOP Server DR 172.23.20.62	HD TMP Partition	OK	1	HARD	0.108	0.001	OK: /tmp: total 3.6GB, used 21.0MB (0.6%), free 3.4GB (93.8%)	used space=21999616B;3097119948;3484259942;0;3871399936 used space (pct.)=0.6%;80;90;0;100
+1634396546	CDN-Server DR 172.23.20.77	HD Data Partition	CRITICAL	1	SOFT	0.125	0.001	CRITICAL: /mnt: total 98.3GB, used 92.5GB (94.1%90%), free 771.8MB (0.8%)	used space=99356045312B;84440508006;94995571507;0;105550635008 used space (pct.)=94.1%;80;90;0;100
+1634396544	TMS System 172.25.20.25	Important TCP Services Status	CRITICAL	1	SOFT	3.016	0.000	Connection refused or timed out	
+1634396544	API-GW Server PROD 172.25.20.35	Apache CPU n MEM load	CRITICAL	1	SOFT	3.022	0.001	Connection refused or timed out	
+1634396545	API-GW Server PROD 172.25.20.35	TCP and UDP Connections	CRITICAL	1	SOFT	2.028	0.001	Connection refused or timed out	
+1634396547	ELK Server UAT 172.21.20.80	Current Users	OK	1	HARD	0.059	0.000	USERS OK - 1 users currently logged in	users=1;5;10;0
+1634396547	CDN-Server UAT Server 172.21.20.52	Apache CPU n MEM load	OK	1	HARD	0.170	0.000	OK  CPU: 0.0% MEM: 0.0% over 0 processes	proc=0 mem=0.0% cpu=0.0% rss=0.0KB vsz=0.0KB
+1634396545	API-GW-MYSQL PROD 172.25.20.65	HD VAR Partition	CRITICAL	1	SOFT	3.011	0.001	Connection refused or timed out	
+1634396548	GIT Server DR 172.23.20.22	Check Traffic	OK	1	HARD	0.052	0.000	RX Bytes:  3GB, TX Bytes: 53GB: RX Speed:  3Kbps, TX Speed:  3Kbps: OK bandwidth utilization	rx=3026;104857600;117964800 tx=3459;104857600;117964800
+1634396548	MYSQL-DB Server DR 172.23.20.83	Check Traffic	OK	1	HARD	0.059	0.001	RX Bytes: 21GB, TX Bytes:  4GB: RX Speed:  4Kbps, TX Speed:  4Kbps: OK bandwidth utilization	rx=3717;104857600;117964800 tx=3641;104857600;117964800
+1634396548	Jenkins Server DR 172.23.20.21	Check Traffic	OK	1	HARD	0.071	0.001	RX Bytes: 60GB, TX Bytes: 45GB: RX Speed:  5Kbps, TX Speed: 17Kbps: OK bandwidth utilization	rx=4715;104857600;117964800 tx=17661;104857600;117964800
+1634396548	Mongo-DB Server DR 172.23.20.42	HD Data Partition	OK	1	HARD	0.115	0.001	OK: /mnt: total 99.9GB, used 594.1MB (0.6%), free 99.3GB (99.4%)	used space=622923776B;85773559398;96495254323;0;107216949248 used space (pct.)=0.6%;80;90;0;100
+1634396546	BOP Server PROD 172.25.20.62	HD Root Partition	CRITICAL	1	SOFT	3.014	0.001	Connection refused or timed out	
+1634396546	API-Server PROD 172.25.20.82	HD VAR Partition	CRITICAL	1	SOFT	3.024	0.001	Connection refused or timed out	
+1634396549	MYSQL-DB Server DR 172.23.20.83	MySql -Service Running	OK	1	HARD	0.030	0.001	Uptime: 14368322  Threads: 2  Questions: 3954101  Slow queries: 0  Opens: 1445  Flush tables: 3  Open tables: 1366  Queries per second avg: 0.275	
+1634396546	CDN-Server PROD 172.25.20.77	Disk I/O	CRITICAL	1	SOFT	3.025	0.001	Connection refused or timed out	
+1634396547	DB Server UAT 172.21.20.60	CPU Stats	OK	1	HARD	2.105	0.000	CPU STATISTICS OK : user=0.25% system=0.00%, iowait=0.00%, idle=99.75%, nice=0.00%, steal=0.00%	CpuUser=0.25%;70;90;0; CpuSystem=0.00%;40;50;0; CpuIowait=0.00%;30;40;0; CpuIdle=99.75%;0;0;0; CpuNice=0.00%;0;0;0; CpuSteal=0.00%;0;0;0;
+1634396549	Mongo-DB Server DR 172.23.20.42	HD TMP Partition	OK	1	HARD	0.114	0.001	OK: /tmp: total 3.6GB, used 21.0MB (0.6%), free 3.4GB (93.8%)	used space=21995520B;3097119948;3484259942;0;3871399936 used space (pct.)=0.6%;80;90;0;100
+1634396549	Middleware Server UAT 172.21.20.70	HD VAR Partition	OK	1	HARD	0.138	0.001	OK: /var: total 7.2GB, used 1.0GB (14.3%), free 5.8GB (80.3%)	used space=1104699392B;6194285772;6968571494;0;7742857216 used space (pct.)=14.3%;80;90;0;100
+1634396547	DNS-Mail Server Prod 172.25.20.55	CPU Stats	CRITICAL	1	SOFT	3.020	0.000	Connection refused or timed out	
+1634396550	Payment-Switch-Srv-DR 172.23.20.85	Important TCP Services Status	CRITICAL	1	SOFT	0.157	0.001	CRITICAL - 1 processes not running:  psprod	
+1634396550	Payment Switch Server- UAT 172.21.20.85	Important TCP Services Status	OK	1	HARD	0.155	0.001	OK - All Services are running! sshd postfix crond nrpe	
+1634396550	Nagios Server DR 172.23.20.50	HD TMP Partition	CRITICAL	1	SOFT	1.009	0.001	Connection refused or timed out	
+1634396548	IVR-Server-prod 172.25.20.44	CPU Stats	CRITICAL	1	SOFT	3.018	0.001	Connection refused or timed out	
+1634396548	EMI-Widget-Server-Prod 172.25.20.71	Check Traffic	CRITICAL	1	SOFT	3.016	0.000	Connection refused or timed out	
+1634396551	API-GW Server DR 172.23.20.35	Current Users	OK	1	HARD	0.038	0.000	USERS OK - 1 users currently logged in	users=1;5;10;0
+1634396551	Web Server UAT 172.21.20.40	Important TCP Services Status	OK	1	HARD	0.189	0.000	OK - All Services are running! sshd postfix crond httpd nrpe	
+1634396549	MYSQL-DB Server PROD 172.25.20.83	Important TCP Services Status	CRITICAL	1	SOFT	3.022	0.001	Connection refused or timed out	
+1634396549	Mongo-DB Server PROD 172.25.20.42	HD TMP Partition	CRITICAL	1	SOFT	3.021	0.001	Connection refused or timed out	
+1634396552	API-GW-MYSQL DR 172.23.20.65	MySql - Slave SQL Running	OK	1	HARD	0.050	0.001	OK - 172.23.20.65 - Slave_SQL_Running Yes	
+1634396550	PBX-Server-Prod 172.25.20.74	MYSQL CPU n MEM load	CRITICAL	1	SOFT	3.014	0.001	Connection refused or timed out	
+1634396551	TMS System 172.25.20.25	PING	CRITICAL	1	SOFT	2.053	0.000	CRITICAL - Host Unreachable (172.25.20.25)	
+1634396552	API-GW Server PROD 172.25.20.35	Total Processes	CRITICAL	1	SOFT	1.058	0.001	Connection refused or timed out	
+1634396552	API-GW Server PROD 172.25.20.35	CPU Stats	CRITICAL	1	SOFT	1.058	0.001	Connection refused or timed out	
+1634396553	BOP Server DR 172.23.20.62	HD VAR Partition	OK	1	HARD	0.112	0.000	OK: /var: total 7.2GB, used 310.2MB (4.2%), free 6.5GB (90.4%)	used space=325271552B;6194285772;6968571494;0;7742857216 used space (pct.)=4.2%;80;90;0;100
+1634396553	CDN-Server DR 172.23.20.77	HD Home Partition	OK	1	HARD	0.114	0.000	OK: /home: total 7.2GB, used 34.5MB (0.5%), free 6.8GB (94.1%)	used space=36204544B;6194285772;6968571494;0;7742857216 used space (pct.)=0.5%;80;90;0;100
+1634396552	API-GW-MYSQL UAT 172.21.20.65	TCP and UDP Connections	OK	1	HARD	1.134	0.001	SOCKET USAGE  OK : used 187	used=187;500;650 tcp=4 udp=1 raw=0
+1634396551	Payment-Switch-Srv-PROD 172.25.20.85	HD VAR/LOG/AUDIT Partition	CRITICAL	1	SOFT	3.024	0.000	Connection refused or timed out	
+1634396552	API-GW-MYSQL PROD 172.25.20.65	HD VAR/LOG Partition	CRITICAL	1	SOFT	2.046	0.001	Connection refused or timed out	
+1634396554	DB Server UAT 172.21.20.60	Check Traffic	OK	1	HARD	0.089	0.001	RX Bytes: 17GB, TX Bytes: 44GB: RX Speed:  5Kbps, TX Speed:  7Kbps: OK bandwidth utilization	rx=4974;104857600;117964800 tx=6700;104857600;117964800
+1634396553	API-Server DR 172.23.20.82	NFS Mount Point Status	OK	1	HARD	1.122	0.000	NFS OK : NFS client services portmapper running. NFS mountpoint /emi healthy	NFS perfdata
+1634396555	GIT Server DR 172.23.20.22	Current Users	OK	1	HARD	0.025	0.000	USERS OK - 1 users currently logged in	users=1;5;10;0
+1634396555	Jenkins Server DR 172.23.20.21	Current Users	OK	1	HARD	0.027	0.000	USERS OK - 3 users currently logged in	users=3;5;10;0
+1634396553	API-Server PROD 172.25.20.82	HD VAR/LOG Partition	CRITICAL	1	SOFT	2.059	0.000	Connection refused or timed out	
+1634396553	BOP Server PROD 172.25.20.62	HD TMP Partition	CRITICAL	1	SOFT	3.015	0.000	Connection refused or timed out	
+1634396556	MYSQL-DB Server DR 172.23.20.83	Current Users	OK	1	HARD	0.033	0.001	USERS OK - 1 users currently logged in	users=1;5;10;0
+1634396554	DNS-Mail Server Prod 172.25.20.55	Check Traffic	CRITICAL	1	SOFT	2.050	0.001	Connection refused or timed out	
+1634396554	CDN-Server UAT Server 172.21.20.52	CPU Stats	OK	1	HARD	2.112	0.001	CPU STATISTICS OK : user=0.00% system=0.00%, iowait=0.00%, idle=100.00%, nice=0.00%, steal=0.00%	CpuUser=0.00%;70;90;0; CpuSystem=0.00%;40;50;0; CpuIowait=0.00%;30;40;0; CpuIdle=100.00%;0;0;0; CpuNice=0.00%;0;0;0; CpuSteal=0.00%;0;0;0;
+1634396556	Mongo-DB Server DR 172.23.20.42	HD VAR Partition	OK	1	HARD	0.121	0.001	OK: /var: total 7.2GB, used 479.2MB (6.5%), free 6.4GB (88.1%)	used space=502448128B;6194285772;6968571494;0;7742857216 used space (pct.)=6.5%;80;90;0;100
+1634396556	Middleware Server UAT 172.21.20.70	HD VAR/LOG Partition	OK	1	HARD	0.141	0.001	OK: /var/log: total 10.7GB, used 348.8MB (3.2%), free 9.8GB (91.5%)	used space=365707264B;9186528460;10334844518;0;11483160576 used space (pct.)=3.2%;80;90;0;100
+1634396555	ELK Server UAT 172.21.20.80	Disk I/O	OK	1	HARD	1.157	0.000	DISK IO OK	sda2_read=0.00;100;150 sda2_write=0.00;70;100sdb_read=0.00;100;150 sdb_write=0.00;70;100sda1_read=0.00;100;150 sda1_write=0.00;70;100
+1634396554	CDN-Server PROD 172.25.20.77	Docker CPU and MEM Load	CRITICAL	1	SOFT	3.015	0.001	Connection refused or timed out	
+1634396557	Payment-Switch-Srv-PROD 172.25.20.85	HD TMP Partition	CRITICAL	1	SOFT	0.032	0.000	Connection refused or timed out	
+1634396555	EMI-Widget-Server-Prod 172.25.20.71	Current Users	CRITICAL	1	SOFT	2.051	0.000	Connection refused or timed out	
+1634396557	Nagios Server DR 172.23.20.50	HD VAR Partition	CRITICAL	1	SOFT	1.014	0.000	Connection refused or timed out	
+1634396555	IVR-Server-prod 172.25.20.44	Check Traffic	CRITICAL	1	SOFT	3.015	0.000	Connection refused or timed out	
+1634396556	MYSQL-DB Server PROD 172.25.20.83	MYSQLD Performance	CRITICAL	1	SOFT	2.043	0.001	Connection refused or timed out	
+1634396558	Payment-Switch-Srv-DR 172.23.20.85	JAVA CPU and MEM Load	OK	1	HARD	0.125	0.001	OK  CPU: 0.0% MEM: 0.0% over 0 processes	proc=0 mem=0.0% cpu=0.0% rss=0.0KB vsz=0.0KB
+1634396556	Mongo-DB Server PROD 172.25.20.42	HD Data Partition	CRITICAL	1	SOFT	3.013	0.001	Connection refused or timed out	
+1634396557	Mongo-DB Server PROD 172.25.20.42	HD VAR Partition	CRITICAL	1	SOFT	2.014	0.000	Connection refused or timed out	
+1634396557	PBX-Server-Prod 172.25.20.74	PING	CRITICAL	1	SOFT	2.043	0.000	CRITICAL - Host Unreachable (172.25.20.74)	
+1634396559	API-GW Server DR 172.23.20.35	DOCKER CPU and MEM Load	OK	1	HARD	0.115	0.000	OK  CPU: 0.0% MEM: 0.0% over 0 processes	proc=0 mem=0.0% cpu=0.0% rss=0.0KB vsz=0.0KB
+1634396559	API-GW-MYSQL DR 172.23.20.65	Apache CPU n MEM load	OK	1	HARD	0.134	0.000	OK  CPU: 0.0% MEM: 0.0% over 0 processes	proc=0 mem=0.0% cpu=0.0% rss=0.0KB vsz=0.0KB
+1634396559	API-GW-MYSQL DR 172.23.20.65	MySql - Total Records Status	OK	1	HARD	0.243	0.000	Master: 201756263 Slave: 201756263	
+1634396556	MYSQL-DB Server DR 172.23.20.83	PING	OK	1	HARD	4.036	0.001	PING OK - Packet loss = 0%, RTA = 4.59 ms	rta=4.587000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396556	Windows DR 172.23.20.100	PING	OK	1	HARD	4.046	0.001	PING OK - Packet loss = 0%, RTA = 1.44 ms	rta=1.437000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396558	Payment-Switch-Srv-PROD 172.25.20.85	Important TCP Services Status	CRITICAL	1	SOFT	2.056	0.001	Connection refused or timed out	
+1634396560	API-GW-MYSQL UAT 172.21.20.65	Total Processes	OK	1	HARD	0.077	0.000	PROCS OK: 34 processes with STATE = RSZDT	procs=34;150;200;0;
+1634396560	BOP Server DR 172.23.20.62	HD VAR/LOG Partition	OK	1	HARD	0.113	0.000	OK: /var/log: total 10.7GB, used 75.9MB (0.7%), free 10.1GB (94.0%)	used space=79622144B;9186528460;10334844518;0;11483160576 used space (pct.)=0.7%;80;90;0;100
+1634396558	TMS System 172.25.20.25	Swap plus RAM	CRITICAL	1	SOFT	3.020	0.001	Connection refused or timed out	
+1634396561	DB Server UAT 172.21.20.60	Current Load	OK	1	HARD	0.027	0.001	OK - load average: 0.38, 0.31, 0.32	load1=0.380;5.000;10.000;0; load5=0.310;4.000;6.000;0; load15=0.320;3.000;4.000;0;
+1634396557	Payment Switch Server- UAT 172.21.20.85	PING	OK	1	HARD	4.060	0.000	PING OK - Packet loss = 0%, RTA = 19.21 ms	rta=19.211000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396561	CDN-Server UAT Server 172.21.20.52	Check Traffic	OK	1	HARD	0.093	0.001	RX Bytes: 443MB, TX Bytes:  5GB: RX Speed:  3Kbps, TX Speed:  3Kbps: OK bandwidth utilization	rx=3551;104857600;117964800 tx=3534;104857600;117964800
+1634396561	CDN-Server DR 172.23.20.77	HD Root Partition	OK	1	HARD	0.125	0.001	OK: /: total 7.2GB, used 2.0GB (27.6%), free 4.8GB (67.0%)	used space=2136842240B;6194285772;6968571494;0;7742857216 used space (pct.)=27.6%;80;90;0;100
+1634396561	DB Server UAT 172.21.20.60	Swap plus RAM	OK	1	HARD	0.151	0.001	OK MEMORY:::: Total: 3789 MB - Used: 3387 MB - 89.39% used --- SWAP:::: Used: 433 MB - 5.67% used  :	USED=3551731712B;;;; TOTAL=3973455872B;;;; SWAP_USED=454033408B;;;; SWAP_TOTAL=8002727936B;;;; MEM_USED_PCT=89.39%;;;; SWAP_USED_PCT=5.67%;;;;
+1634396559	API-GW-MYSQL PROD 172.25.20.65	HD VAR/LOG/AUDIT Partition	CRITICAL	1	SOFT	3.017	0.000	Connection refused or timed out	
+1634396559	API-GW Server PROD 172.25.20.35	Check Traffic	CRITICAL	1	SOFT	3.020	0.000	Connection refused or timed out	
+1634396560	API-GW-MYSQL PROD 172.25.20.65	HD Home Partition	CRITICAL	1	SOFT	2.017	0.000	Connection refused or timed out	
+1634396560	BOP Server PROD 172.25.20.62	HD VAR Partition	CRITICAL	1	SOFT	2.061	0.000	Connection refused or timed out	
+1634396558	Web Server UAT 172.21.20.40	PING	OK	1	HARD	4.051	0.001	PING OK - Packet loss = 0%, RTA = 19.63 ms	rta=19.631001ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396562	BOP Server PROD 172.25.20.62	Disk I/O	CRITICAL	1	SOFT	0.062	0.000	Connection refused or timed out	
+1634396562	ELK Server UAT 172.21.20.80	Docker CPU and MEM Load	OK	1	HARD	0.214	0.000	OK /usr/bin/dockerd CPU: 0% MEM: 2.0% over 1 processes	proc=1 mem=2.0% cpu=0% rss=78524.0KB vsz=552416.0KB
+1634396560	API-Server PROD 172.25.20.82	HD VAR/LOG/AUDIT Partition	CRITICAL	1	SOFT	3.023	0.000	Connection refused or timed out	
+1634396562	CDN-Server PROD 172.25.20.77	CPU Stats	CRITICAL	1	SOFT	1.043	0.000	Connection refused or timed out	
+1634396561	CDN-Server PROD 172.25.20.77	Docker Status	CRITICAL	1	SOFT	2.041	0.001	Connection refused or timed out	
+1634396563	MYSQL-DB Server DR 172.23.20.83	DataBase Sync Backup Status	WARNING	1	SOFT	0.057	0.001	WARNING: File /var/log/sync/sync_DB-backup.log is 8090.295 hours old, threhsold is =1 hours.	
+1634396563	MYSQL-DB Server DR 172.23.20.83	Swap plus RAM	OK	1	HARD	0.114	0.001	OK MEMORY:::: Total: 7820 MB - Used: 5585 MB - 71.42% used --- SWAP:::: Used: 0 MB - 0.00% used  :	USED=5856653312B;;;; TOTAL=8200642560B;;;; SWAP_USED=0B;;;; SWAP_TOTAL=8002727936B;;;; MEM_USED_PCT=71.42%;;;; SWAP_USED_PCT=0.00%;;;;
+1634396562	GIT Server DR 172.23.20.22	Disk I/O	OK	1	HARD	1.128	0.000	DISK IO OK	sda2_read=0.00;100;150 sda2_write=3.00;70;100sda1_read=0.00;100;150 sda1_write=0.00;70;100
+1634396563	Middleware Server UAT 172.21.20.70	HD VAR/LOG/AUDIT Partition	OK	1	HARD	0.138	0.001	OK: /var/log/audit: total 3.6GB, used 52.1MB (1.4%), free 3.4GB (93.0%)	used space=54591488B;3097119948;3484259942;0;3871399936 used space (pct.)=1.4%;80;90;0;100
+1634396560	API-Server DR 172.23.20.82	PING	OK	1	HARD	4.024	0.000	PING OK - Packet loss = 0%, RTA = 2.67 ms	rta=2.669000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396562	IVR-Server-prod 172.25.20.44	Disk I/O	CRITICAL	1	SOFT	2.055	0.000	Connection refused or timed out	
+1634396562	IVR-Server-prod 172.25.20.44	TCP and UDP Connections	CRITICAL	1	SOFT	2.056	0.000	Connection refused or timed out	
+1634396564	Mongo-DB Server DR 172.23.20.42	HD VAR/LOG Partition	OK	1	HARD	0.099	0.001	OK: /var/log: total 10.7GB, used 82.4MB (0.8%), free 10.0GB (94.0%)	used space=86368256B;9186528460;10334844518;0;11483160576 used space (pct.)=0.8%;80;90;0;100
+1634396563	Jenkins Server DR 172.23.20.21	Disk I/O	OK	1	HARD	1.104	0.001	DISK IO OK	sda2_read=0.00;100;150 sda2_write=0.00;70;100sda1_read=0.00;100;150 sda1_write=0.00;70;100
+1634396562	DNS-Mail Server Prod 172.25.20.55	Disk I/O	CRITICAL	1	SOFT	3.018	0.000	Connection refused or timed out	
+1634396564	Nagios Server DR 172.23.20.50	HD VAR/LOG Partition	CRITICAL	1	SOFT	1.012	0.001	Connection refused or timed out	
+1634396562	EMI-Widget-Server-Prod 172.25.20.71	DOCKER CPU and MEM Load	CRITICAL	1	SOFT	3.032	0.000	Connection refused or timed out	
+1634396564	Mongo-DB Server PROD 172.25.20.42	HD VAR/LOG Partition	CRITICAL	1	SOFT	1.049	0.001	Connection refused or timed out	
+1634396565	Payment Switch Server- UAT 172.21.20.85	Swap plus RAM	OK	1	HARD	0.156	0.000	OK MEMORY:::: Total: 7821 MB - Used: 1590 MB - 20.33% used --- SWAP:::: Used: 0 MB - 0.00% used  :	USED=1667497984B;;;; TOTAL=8201314304B;;;; SWAP_USED=0B;;;; SWAP_TOTAL=8002727936B;;;; MEM_USED_PCT=20.33%;;;; SWAP_USED_PCT=0.00%;;;;
+1634396565	Web Server UAT 172.21.20.40	Swap plus RAM	OK	1	HARD	0.159	0.000	OK MEMORY:::: Total: 3789 MB - Used: 343 MB - 9.06% used --- SWAP:::: Used: 0 MB - 0.00% used  :	USED=359944192B;;;; TOTAL=3973767168B;;;; SWAP_USED=0B;;;; SWAP_TOTAL=8002727936B;;;; MEM_USED_PCT=9.06%;;;; SWAP_USED_PCT=0.00%;;;;
+1634396563	MYSQL-DB Server PROD 172.25.20.83	MYSQLD Total connections	CRITICAL	1	SOFT	3.011	0.001	Connection refused or timed out	
+1634396566	API-GW-MYSQL DR 172.23.20.65	MySql -Service Running	OK	1	HARD	0.029	0.001	Uptime: 14368502  Threads: 4  Questions: 15153987  Slow queries: 0  Opens: 552  Flush tables: 3  Open tables: 387  Queries per second avg: 1.054	
+1634396566	GIT Server DR 172.23.20.22	Total Processes	OK	1	HARD	0.058	0.001	PROCS OK: 70 processes with STATE = RSZDT	procs=70;150;200;0;
+1634396566	API-GW Server DR 172.23.20.35	DOCKER Status	UNKNOWN	1	SOFT	0.292	0.001	UNKNOWN: Cannot access docker socket file. User ID=0, socket file=/var/run/docker.sock	
+1634396564	PBX-Server-Prod 172.25.20.74	SIP Trunk Status Call Center	CRITICAL	1	SOFT	3.018	0.001	Connection refused or timed out	
+1634396567	BOP Server DR 172.23.20.62	HD VAR/LOG/AUDIT Partition	OK	1	HARD	0.112	0.001	OK: /var/log/audit: total 3.6GB, used 49.5MB (1.3%), free 3.4GB (93.1%)	used space=51904512B;3097119948;3484259942;0;3871399936 used space (pct.)=1.3%;80;90;0;100
+1634396567	API-Server DR 172.23.20.82	Swap plus RAM	OK	1	HARD	0.119	0.001	OK MEMORY:::: Total: 3789 MB - Used: 258 MB - 6.83% used --- SWAP:::: Used: 0 MB - 0.00% used  :	USED=271450112B;;;; TOTAL=3973464064B;;;; SWAP_USED=0B;;;; SWAP_TOTAL=8002727936B;;;; MEM_USED_PCT=6.83%;;;; SWAP_USED_PCT=0.00%;;;;
+1634396567	API-Server DR 172.23.20.82	Apache CPU n MEM load	OK	1	HARD	0.130	0.001	OK  CPU: 0.0% MEM: 0.0% over 0 processes	proc=0 mem=0.0% cpu=0.0% rss=0.0KB vsz=0.0KB
+1634396565	Payment-Switch-Srv-PROD 172.25.20.85	JAVA CPU and MEM Load	CRITICAL	1	SOFT	3.011	0.000	Connection refused or timed out	
+1634396565	TMS System 172.25.20.25	TCP and UDP Connections	CRITICAL	1	SOFT	3.018	0.000	Connection refused or timed out	
+1634396568	CDN-Server UAT Server 172.21.20.52	Current Users	OK	1	HARD	0.059	0.000	USERS OK - 0 users currently logged in	users=0;5;10;0
+1634396566	API-GW Server PROD 172.25.20.35	Current Users	CRITICAL	1	SOFT	2.061	0.001	Connection refused or timed out	
+1634396566	API-GW-MYSQL DR 172.23.20.65	CPU Stats	OK	1	HARD	2.071	0.001	CPU STATISTICS OK : user=1.26% system=1.51%, iowait=0.50%, idle=96.73%, nice=0.00%, steal=0.00%	CpuUser=1.26%;70;90;0; CpuSystem=1.51%;40;50;0; CpuIowait=0.50%;30;40;0; CpuIdle=96.73%;0;0;0; CpuNice=0.00%;0;0;0; CpuSteal=0.00%;0;0;0;
+1634396568	CDN-Server DR 172.23.20.77	HD TMP Partition	OK	1	HARD	0.114	0.000	OK: /tmp: total 3.6GB, used 21.0MB (0.6%), free 3.4GB (93.8%)	used space=21999616B;3097119948;3484259942;0;3871399936 used space (pct.)=0.6%;80;90;0;100
+1634396565	Payment-Switch-Srv-DR 172.23.20.85	PING	OK	1	HARD	4.037	0.000	PING OK - Packet loss = 0%, RTA = 1.11 ms	rta=1.107000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396569	DB Server UAT 172.21.20.60	Current Users	OK	1	HARD	0.056	0.000	USERS OK - 0 users currently logged in	users=0;5;10;0
+1634396569	GIT Server DR 172.23.20.22	HD Data Partition	OK	1	HARD	0.107	0.001	OK: /mnt: total 29.4GB, used 10.2GB (34.6%), free 17.7GB (60.2%)	used space=10934640640B;25254667878;28411501363;0;31568334848 used space (pct.)=34.6%;80;90;0;100
+1634396569	ELK Server UAT 172.21.20.80	HD Data Partition	OK	1	HARD	0.148	0.000	OK: /elk: total 146.5GB, used 25.4GB (17.3%), free 113.7GB (77.6%)	used space=27273977856B;125874012160;141608263680;0;157342515200 used space (pct.)=17.3%;80;90;0;100
+1634396567	API-GW-MYSQL PROD 172.25.20.65	Important TCP Services Status	CRITICAL	1	SOFT	3.018	0.001	Connection refused or timed out	
+1634396569	API-Server PROD 172.25.20.82	HD Home Partition	CRITICAL	1	SOFT	1.018	0.000	Connection refused or timed out	
+1634396568	PBX-Server-Prod 172.25.20.74	Disk I/O	CRITICAL	1	SOFT	2.028	0.000	Connection refused or timed out	
+1634396567	API-Server PROD 172.25.20.82	Important TCP Services Status	CRITICAL	1	SOFT	3.017	0.001	Connection refused or timed out	
+1634396570	Jenkins Server DR 172.23.20.21	HD Data Partition	OK	1	HARD	0.155	0.001	OK: /mnt: total 98.3GB, used 44.8GB (45.6%), free 49.2GB (50.0%)	used space=48119173120B;84440508006;94995571507;0;105550635008 used space (pct.)=45.6%;80;90;0;100
+1634396568	BOP Server PROD 172.25.20.62	HD VAR/LOG Partition	CRITICAL	1	SOFT	3.012	0.000	Connection refused or timed out	
+1634396568	CDN-Server PROD 172.25.20.77	HD CDN Partition	CRITICAL	1	SOFT	3.017	0.000	Connection refused or timed out	
+1634396571	Windows DR 172.23.20.100	Memory Usage	OK	1	HARD	0.021	0.001	Memory usage: total:4064.89 MB - used: 3183.62 MB (78%) - free: 881.27 MB (22%)	Memory usage=3183.62MB;3455.16;3658.40;0.00;4064.89
+1634396569	DNS-Mail Server Prod 172.25.20.55	HD Home Partition	CRITICAL	1	SOFT	2.051	0.000	Connection refused or timed out	
+1634396571	Mongo-DB Server DR 172.23.20.42	HD VAR/LOG/AUDIT Partition	OK	1	HARD	0.106	0.001	OK: /var/log/audit: total 3.6GB, used 52.5MB (1.4%), free 3.4GB (93.0%)	used space=55017472B;3097119948;3484259942;0;3871399936 used space (pct.)=1.4%;80;90;0;100
+1634396570	MYSQL-DB Server DR 172.23.20.83	Disk I/O	OK	1	HARD	1.116	0.001	DISK IO OK	sda2_read=0.00;100;150 sda2_write=0.00;70;100sdb_read=0.00;100;150 sdb_write=0.00;70;100sda1_read=0.00;100;150 sda1_write=0.00;70;100
+1634396570	MYSQL-DB Server DR 172.23.20.83	TCP and UDP Connections	OK	1	HARD	1.116	0.001	SOCKET USAGE  OK : used 223	used=223;500;650 tcp=6 udp=5 raw=0
+1634396571	Web Server UAT 172.21.20.40	HD VAR/LOG Partition	OK	1	HARD	0.149	0.001	OK: /var/log: total 10.7GB, used 111.8MB (1.0%), free 10.0GB (93.7%)	used space=117190656B;9186528460;10334844518;0;11483160576 used space (pct.)=1.0%;80;90;0;100
+1634396571	Middleware Server UAT 172.21.20.70	Important TCP Services Status	OK	1	HARD	0.244	0.001	OK - All Services are running! sshd mongod postfix crond httpd nrpe	
+1634396569	EMI-Widget-Server-Prod 172.25.20.71	DOCKER Status	CRITICAL	1	SOFT	3.016	0.001	Connection refused or timed out	
+1634396571	Nagios Server DR 172.23.20.50	HD VAR/LOG/AUDIT Partition	CRITICAL	1	SOFT	1.017	0.001	Connection refused or timed out	
+1634396572	Payment-Switch-Srv-DR 172.23.20.85	Swap plus RAM	OK	1	HARD	0.128	0.001	OK MEMORY:::: Total: 7820 MB - Used: 255 MB - 3.27% used --- SWAP:::: Used: 0 MB - 0.00% used  :	USED=268214272B;;;; TOTAL=8200650752B;;;; SWAP_USED=0B;;;; SWAP_TOTAL=8002727936B;;;; MEM_USED_PCT=3.27%;;;; SWAP_USED_PCT=0.00%;;;;
+1634396572	PBX-Server-Prod 172.25.20.74	Swap plus RAM	CRITICAL	1	SOFT	1.033	0.001	Connection refused or timed out	
+1634396570	IVR-Server-prod 172.25.20.44	HD Home Partition	CRITICAL	1	SOFT	3.028	0.001	Connection refused or timed out	
+1634396573	API-GW-MYSQL DR 172.23.20.65	Check Traffic	OK	1	HARD	0.067	0.001	RX Bytes: 20GB, TX Bytes:  4GB: RX Speed: 32Kbps, TX Speed:  5Kbps: OK bandwidth utilization	rx=32427;104857600;117964800 tx=5063;104857600;117964800
+1634396570	MYSQL-DB Server PROD 172.25.20.83	MySql -Service Running	CRITICAL	1	SOFT	3.041	0.001	Connection refused or timed out	
+1634396572	Payment Switch Server- UAT 172.21.20.85	TCP and UDP Connections	OK	1	HARD	1.134	0.001	SOCKET USAGE  OK : used 213	used=213;500;650 tcp=9 udp=3 raw=0
+1634396571	Mongo-DB Server PROD 172.25.20.42	HD VAR/LOG/AUDIT Partition	CRITICAL	1	SOFT	3.026	0.001	Connection refused or timed out	
+1634396572	TMS System 172.25.20.25	Total Processes	CRITICAL	1	SOFT	2.046	0.001	Connection refused or timed out	
+1634396573	API-GW Server DR 172.23.20.35	Disk I/O	OK	1	HARD	1.127	0.001	DISK IO OK	sda2_read=0.00;100;150 sda2_write=0.00;70;100sdb_read=0.00;100;150 sdb_write=0.00;70;100sda1_read=0.00;100;150 sda1_write=0.00;70;100
+1634396573	Web Server UAT 172.21.20.40	TCP and UDP Connections	OK	1	HARD	1.136	0.000	SOCKET USAGE  OK : used 266	used=266;650;750 tcp=62 udp=5 raw=0
+1634396572	Payment-Switch-Srv-PROD 172.25.20.85	PING	CRITICAL	1	SOFT	3.044	0.001	CRITICAL - Host Unreachable (172.25.20.85)	
+1634396575	BOP Server DR 172.23.20.62	Important TCP Services Status	OK	1	HARD	0.103	0.000	OK - All Services are running! sshd crond nrpe	
+1634396574	API-Server DR 172.23.20.82	TCP and UDP Connections	OK	1	HARD	1.105	0.000	SOCKET USAGE  OK : used 239	used=239;500;650 tcp=8 udp=8 raw=0
+1634396575	CDN-Server DR 172.23.20.77	HD VAR Partition	OK	1	HARD	0.110	0.000	OK: /var: total 7.2GB, used 602.9MB (8.2%), free 6.2GB (86.5%)	used space=632143872B;6194285772;6968571494;0;7742857216 used space (pct.)=8.2%;80;90;0;100
+1634396573	API-GW Server PROD 172.25.20.35	DOCKER CPU and MEM Load	CRITICAL	1	SOFT	3.027	0.001	Connection refused or timed out	
+1634396574	API-Server DR 172.23.20.82	CPU Stats	OK	1	HARD	2.070	0.000	CPU STATISTICS OK : user=0.00% system=0.00%, iowait=0.00%, idle=100.00%, nice=0.00%, steal=0.00%	CpuUser=0.00%;70;90;0; CpuSystem=0.00%;40;50;0; CpuIowait=0.00%;30;40;0; CpuIdle=100.00%;0;0;0; CpuNice=0.00%;0;0;0; CpuSteal=0.00%;0;0;0;
+1634396574	API-Server PROD 172.25.20.82	NFS Mount Point Status	CRITICAL	1	SOFT	2.068	0.000	Connection refused or timed out	
+1634396574	API-GW-MYSQL PROD 172.25.20.65	PING	CRITICAL	1	SOFT	2.085	0.000	CRITICAL - Host Unreachable (172.25.20.65)	
+1634396576	ELK Server UAT 172.21.20.80	HD Home Partition	OK	1	HARD	0.143	0.000	OK: /home: total 7.2GB, used 35.2MB (0.5%), free 6.8GB (94.1%)	used space=36913152B;6194285772;6968571494;0;7742857216 used space (pct.)=0.5%;80;90;0;100
+1634396577	MYSQL-DB Server DR 172.23.20.83	Total Processes	OK	1	HARD	0.048	0.001	PROCS OK: 71 processes with STATE = RSZDT	procs=71;150;200;0;
+1634396575	BOP Server PROD 172.25.20.62	HD VAR/LOG/AUDIT Partition	CRITICAL	1	SOFT	2.058	0.000	Connection refused or timed out	
+1634396577	MYSQL-DB Server DR 172.23.20.83	HD Data Partition	WARNING	1	SOFT	0.105	0.001	Warning: /mnt: total 147.4GB, used 122.2GB (82.9%80%), free 17.7GB (12.0%)	used space=131219632128B;126635645337;142465101004;0;158294556672 used space (pct.)=82.9%;80;90;0;100
+1634396577	GIT Server DR 172.23.20.22	HD Home Partition	OK	1	HARD	0.105	0.001	OK: /home: total 7.2GB, used 2.9GB (39.7%), free 4.0GB (54.9%)	used space=3076366336B;6194285772;6968571494;0;7742857216 used space (pct.)=39.7%;80;90;0;100
+1634396577	Jenkins Server DR 172.23.20.21	HD Home Partition	OK	1	HARD	0.113	0.001	OK: /home: total 7.2GB, used 587.8MB (8.0%), free 6.2GB (86.7%)	used space=616345600B;6194285772;6968571494;0;7742857216 used space (pct.)=8.0%;80;90;0;100
+1634396576	CDN-Server UAT Server 172.21.20.52	Disk I/O	OK	1	HARD	1.145	0.000	DISK IO OK	sda2_read=0.00;100;150 sda2_write=0.00;70;100sda1_read=0.00;100;150 sda1_write=0.00;70;100
+1634396576	DB Server UAT 172.21.20.60	Disk I/O	OK	1	HARD	1.149	0.000	DISK IO OK	sda2_read=0.00;100;150 sda2_write=0.00;70;100sda1_read=0.00;100;150 sda1_write=0.00;70;100
+1634396575	CDN-Server PROD 172.25.20.77	HD Data Partition	CRITICAL	1	SOFT	3.017	0.000	Connection refused or timed out	
+1634396574	API-GW-MYSQL DR 172.23.20.65	PING	OK	1	HARD	4.019	0.000	PING OK - Packet loss = 0%, RTA = 0.89 ms	rta=0.887000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396576	EMI-Widget-Server-Prod 172.25.20.71	Disk I/O	CRITICAL	1	SOFT	2.064	0.000	Connection refused or timed out	
+1634396578	Mongo-DB Server DR 172.23.20.42	Important TCP Services Status	OK	1	HARD	0.111	0.001	OK - All Services are running! sshd crond nrpe	
+1634396578	Middleware Server UAT 172.21.20.70	MONGO CPU and MEM Load	OK	1	HARD	0.190	0.001	OK /usr/bin/mongod CPU: .5% MEM: .8% over 1 processes	proc=1 mem=.8% cpu=.5% rss=133488.0KB vsz=1611340.0KB
+1634396576	DNS-Mail Server Prod 172.25.20.55	HD Root Partition	CRITICAL	1	SOFT	3.019	0.000	Connection refused or timed out	
+1634396579	Payment Switch Server- UAT 172.21.20.85	Total Processes	OK	1	HARD	0.075	0.001	PROCS OK: 49 processes with STATE = RSZDT	procs=49;150;200;0;
+1634396577	IVR-Server-prod 172.25.20.44	HD Root Partition	CRITICAL	1	SOFT	2.100	0.001	Connection refused or timed out	
+1634396578	MYSQL-DB Server PROD 172.25.20.83	PING	CRITICAL	1	SOFT	1.116	0.001	CRITICAL - Host Unreachable (172.25.20.83)	
+1634396579	Payment Switch Server- UAT 172.21.20.85	HD TMP Partition	OK	1	HARD	0.146	0.001	OK: /tmp: total 3.6GB, used 21.0MB (0.6%), free 3.4GB (93.8%)	used space=22032384B;3097119948;3484259942;0;3871399936 used space (pct.)=0.6%;80;90;0;100
+1634396579	Nagios Server DR 172.23.20.50	Important TCP Services Status	CRITICAL	1	SOFT	1.010	0.000	Connection refused or timed out	
+1634396580	Windows DR 172.23.20.100	CPU Load	OK	1	HARD	0.024	0.000	CPU Load 17% (5 min average)	5 min avg Load=17%;70;80;0;100
+1634396578	Mongo-DB Server PROD 172.25.20.42	Important TCP Services Status	CRITICAL	1	SOFT	2.050	0.001	Connection refused or timed out	
+1634396580	Web Server UAT 172.21.20.40	Total Processes	OK	1	HARD	0.098	0.000	PROCS OK: 56 processes with STATE = RSZDT	procs=56;150;200;0;
+1634396579	Payment-Switch-Srv-DR 172.23.20.85	TCP and UDP Connections	OK	1	HARD	1.109	0.001	SOCKET USAGE  OK : used 211	used=211;500;650 tcp=9 udp=3 raw=0
+1634396580	API-GW Server DR 172.23.20.35	HD Data Partition	OK	1	HARD	0.105	0.000	OK: /mnt: total 29.3GB, used 5.0GB (17.1%), free 22.8GB (77.7%)	used space=5389082624B;25174923673;28321789132;0;31468654592 used space (pct.)=17.1%;80;90;0;100
+1634396580	Web Server UAT 172.21.20.40	HD VAR/LOG/AUDIT Partition	OK	1	HARD	0.179	0.000	OK: /var/log/audit: total 3.6GB, used 50.2MB (1.4%), free 3.4GB (93.0%)	used space=52641792B;3097119948;3484259942;0;3871399936 used space (pct.)=1.4%;80;90;0;100
+1634396580	Web Server UAT 172.21.20.40	Apache CPU n MEM load	OK	1	HARD	0.657	0.000	OK /usr/sbin/httpd CPU: 0% MEM: 8.6% over 11 processes	proc=11 mem=8.6% cpu=0% rss=355732.0KB vsz=7845572.0KB
+1634396581	API-GW-MYSQL DR 172.23.20.65	Current Users	OK	1	HARD	0.022	0.000	USERS OK - 1 users currently logged in	users=1;5;10;0
+1634396581	API-Server DR 172.23.20.82	Total Processes	OK	1	HARD	0.049	0.000	PROCS OK: 54 processes with STATE = RSZDT	procs=54;150;200;0;
+1634396581	API-Server DR 172.23.20.82	Check Traffic	OK	1	HARD	0.056	0.000	RX Bytes:  8GB, TX Bytes:  3GB: RX Speed:  3Kbps, TX Speed:  3Kbps: OK bandwidth utilization	rx=3492;104857600;117964800 tx=3465;104857600;117964800
+1634396581	API-GW-MYSQL DR 172.23.20.65	Swap plus RAM	OK	1	HARD	0.117	0.000	OK MEMORY:::: Total: 5805 MB - Used: 5176 MB - 89.17% used --- SWAP:::: Used: 560 MB - 7.34% used  :	USED=5428105216B;;;; TOTAL=6087344128B;;;; SWAP_USED=587735040B;;;; SWAP_TOTAL=8002727936B;;;; MEM_USED_PCT=89.17%;;;; SWAP_USED_PCT=7.34%;;;;
+1634396579	Payment-Switch-Srv-PROD 172.25.20.85	Swap plus RAM	CRITICAL	1	SOFT	3.023	0.001	Connection refused or timed out	
+1634396579	PBX-Server-Prod 172.25.20.74	TCP and UDP Connections	CRITICAL	1	SOFT	3.026	0.000	Connection refused or timed out	
+1634396582	CDN-Server DR 172.23.20.77	HD VAR/LOG Partition	OK	1	HARD	0.118	0.000	OK: /var/log: total 10.7GB, used 90.9MB (0.8%), free 10.0GB (93.9%)	used space=95309824B;9186528460;10334844518;0;11483160576 used space (pct.)=0.8%;80;90;0;100
+1634396580	API-GW Server PROD 172.25.20.35	DOCKER Status	CRITICAL	1	SOFT	3.026	0.001	Connection refused or timed out	
+1634396583	DB Server UAT 172.21.20.60	HD Home Partition	OK	1	HARD	0.134	0.000	OK: /home: total 7.2GB, used 182.1MB (2.5%), free 6.6GB (92.1%)	used space=190914560B;6194285772;6968571494;0;7742857216 used space (pct.)=2.5%;80;90;0;100
+1634396583	CDN-Server UAT Server 172.21.20.52	HD Home Partition	OK	1	HARD	0.149	0.000	OK: /home: total 7.2GB, used 2.9GB (39.6%), free 4.0GB (55.0%)	used space=3064836096B;6194285772;6968571494;0;7742857216 used space (pct.)=39.6%;80;90;0;100
+1634396583	ELK Server UAT 172.21.20.80	HD Root Partition	OK	1	HARD	0.154	0.000	OK: /: total 7.2GB, used 2.5GB (34.5%), free 4.3GB (60.1%)	used space=2671063040B;6194285772;6968571494;0;7742857216 used space (pct.)=34.5%;80;90;0;100
+1634396582	BOP Server DR 172.23.20.62	NFS Mount Point Status	OK	1	HARD	1.168	0.000	NFS OK : NFS client services portmapper running. NFS mountpoint /portal /mnt/emi healthy	NFS perfdata
+1634396581	API-GW-MYSQL PROD 172.25.20.65	Swap plus RAM	CRITICAL	1	SOFT	3.019	0.000	Connection refused or timed out	
+1634396583	CDN-Server PROD 172.25.20.77	HD Home Partition	CRITICAL	1	SOFT	1.048	0.000	Connection refused or timed out	
+1634396584	GIT Server DR 172.23.20.22	HD Root Partition	OK	1	HARD	0.101	0.001	OK: /: total 7.2GB, used 3.5GB (49.2%), free 3.3GB (45.5%)	used space=3806203904B;6194285772;6968571494;0;7742857216 used space (pct.)=49.2%;80;90;0;100
+1634396584	MYSQL-DB Server DR 172.23.20.83	HD Home Partition	OK	1	HARD	0.110	0.001	OK: /home: total 7.2GB, used 34.7MB (0.5%), free 6.8GB (94.1%)	used space=36339712B;6194285772;6968571494;0;7742857216 used space (pct.)=0.5%;80;90;0;100
+1634396584	Jenkins Server DR 172.23.20.21	HD Root Partition	OK	1	HARD	0.109	0.001	OK: /: total 7.2GB, used 2.0GB (27.4%), free 4.8GB (67.2%)	used space=2123206656B;6194285772;6968571494;0;7742857216 used space (pct.)=27.4%;80;90;0;100
+1634396582	BOP Server PROD 172.25.20.62	Important TCP Services Status	CRITICAL	1	SOFT	3.014	0.000	Connection refused or timed out	
+1634396582	API-Server PROD 172.25.20.82	PING	CRITICAL	1	SOFT	3.025	0.000	CRITICAL - Host Unreachable (172.25.20.82)	
+1634396583	DNS-Mail Server Prod 172.25.20.55	HD TMP Partition	CRITICAL	1	SOFT	3.039	0.000	Connection refused or timed out	
+1634396586	Payment-Switch-Srv-DR 172.23.20.85	Total Processes	OK	1	HARD	0.048	0.001	PROCS OK: 74 processes with STATE = RSZDT	procs=74;150;200;0;
+1634396586	Payment-Switch-Srv-DR 172.23.20.85	Apache CPU n MEM load	OK	1	HARD	0.126	0.001	OK  CPU: 0.0% MEM: 0.0% over 0 processes	proc=0 mem=0.0% cpu=0.0% rss=0.0KB vsz=0.0KB
+1634396586	Nagios Server DR 172.23.20.50	Nagios CPU and MEM Load	CRITICAL	1	SOFT	1.017	0.000	Connection refused or timed out	
+1634396584	EMI-Widget-Server-Prod 172.25.20.71	HD Home Partition	CRITICAL	1	SOFT	3.011	0.001	Connection refused or timed out	
+1634396584	IVR-Server-prod 172.25.20.44	HD TMP Partition	CRITICAL	1	SOFT	3.024	0.001	Connection refused or timed out	
+1634396587	API-GW Server DR 172.23.20.35	HD Home Partition	OK	1	HARD	0.094	0.000	OK: /home: total 7.2GB, used 34.3MB (0.5%), free 6.8GB (94.2%)	used space=35979264B;6194285772;6968571494;0;7742857216 used space (pct.)=0.5%;80;90;0;100
+1634396585	MYSQL-DB Server PROD 172.25.20.83	Apache CPU n MEM load	CRITICAL	1	SOFT	3.013	0.000	Connection refused or timed out	
+1634396585	MYSQL-DB Server PROD 172.25.20.83	Swap plus RAM	CRITICAL	1	SOFT	3.012	0.000	Connection refused or timed out	
+1634396588	API-Server DR 172.23.20.82	Current Users	OK	1	HARD	0.036	0.000	USERS OK - 1 users currently logged in	users=1;5;10;0
+1634396588	Payment-Switch-Srv-DR 172.23.20.85	HD VAR Partition	OK	1	HARD	0.103	0.000	OK: /var: total 7.2GB, used 351.1MB (4.8%), free 6.5GB (89.9%)	used space=368205824B;6194285772;6968571494;0;7742857216 used space (pct.)=4.8%;80;90;0;100
+1634396586	PBX-Server-Prod 172.25.20.74	Total Processes	CRITICAL	1	SOFT	3.016	0.001	Connection refused or timed out	
+1634396586	Mongo-DB Server PROD 172.25.20.42	PING	CRITICAL	1	SOFT	3.028	0.000	CRITICAL - Host Unreachable (172.25.20.42)	
+1634396585	Mongo-DB Server DR 172.23.20.42	PING	OK	1	HARD	4.037	0.000	PING OK - Packet loss = 0%, RTA = 2.24 ms	rta=2.239000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396585	Middleware Server UAT 172.21.20.70	PING	OK	1	HARD	4.059	0.000	PING OK - Packet loss = 0%, RTA = 19.22 ms	rta=19.218000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396588	API-GW Server PROD 172.25.20.35	Disk I/O	CRITICAL	1	SOFT	1.065	0.000	Connection refused or timed out	
+1634396589	BOP Server DR 172.23.20.62	HD Data Partition	OK	1	HARD	0.110	0.001	OK: /mnt: total 19.5GB, used 2.8GB (14.2%), free 15.7GB (80.6%)	used space=2972086272B;16720029286;18810032947;0;20900036608 used space (pct.)=14.2%;80;90;0;100
+1634396587	Web Server UAT 172.21.20.40	CPU Stats	OK	1	HARD	2.114	0.000	CPU STATISTICS OK : user=0.00% system=0.00%, iowait=0.00%, idle=100.00%, nice=0.00%, steal=0.00%	CpuUser=0.00%;70;90;0; CpuSystem=0.00%;40;50;0; CpuIowait=0.00%;30;40;0; CpuIdle=100.00%;0;0;0; CpuNice=0.00%;0;0;0; CpuSteal=0.00%;0;0;0;
+1634396588	API-GW-MYSQL DR 172.23.20.65	TCP and UDP Connections	OK	1	HARD	1.126	0.000	SOCKET USAGE  OK : used 160	used=160;500;650 tcp=10 udp=10 raw=0
+1634396588	API-GW-MYSQL DR 172.23.20.65	Disk I/O	OK	1	HARD	1.127	0.000	DISK IO OK	sda2_read=0.00;100;150 sda2_write=0.00;70;100sdb_read=0.00;100;150 sdb_write=32.00;70;100sda1_read=0.00;100;150 sda1_write=0.00;70;100
+1634396587	Payment-Switch-Srv-PROD 172.25.20.85	TCP and UDP Connections	CRITICAL	1	SOFT	3.017	0.000	Connection refused or timed out	
+1634396590	MYSQL-DB Server DR 172.23.20.83	MySql - Slave IO Running	CRITICAL	1	SOFT	0.051	0.001	CRITICAL - 172.23.20.83 - Slave_IO_Running No	
+1634396590	CDN-Server DR 172.23.20.77	HD VAR/LOG/AUDIT Partition	OK	1	HARD	0.119	0.000	OK: /var/log/audit: total 3.6GB, used 47.4MB (1.3%), free 3.4GB (93.1%)	used space=49704960B;3097119948;3484259942;0;3871399936 used space (pct.)=1.3%;80;90;0;100
+1634396590	CDN-Server UAT Server 172.21.20.52	HD Root Partition	OK	1	HARD	0.139	0.001	OK: /: total 7.2GB, used 4.0GB (56.0%), free 2.8GB (38.6%)	used space=4335448064B;6194285772;6968571494;0;7742857216 used space (pct.)=56.0%;80;90;0;100
+1634396590	DB Server UAT 172.21.20.60	HD Root Partition	OK	1	HARD	0.149	0.001	OK: /: total 7.2GB, used 3.6GB (50.5%), free 3.2GB (44.1%)	used space=3910500352B;6194285772;6968571494;0;7742857216 used space (pct.)=50.5%;80;90;0;100
+1634396588	API-GW-MYSQL PROD 172.25.20.65	TCP and UDP Connections	CRITICAL	1	SOFT	3.030	0.000	Connection refused or timed out	
+1634396589	API-Server PROD 172.25.20.82	Apache CPU n MEM load	CRITICAL	1	SOFT	2.052	0.001	Connection refused or timed out	
+1634396589	API-Server PROD 172.25.20.82	Swap plus RAM	CRITICAL	1	SOFT	2.052	0.001	Connection refused or timed out	
+1634396591	GIT Server DR 172.23.20.22	HD TMP Partition	OK	1	HARD	0.104	0.000	OK: /tmp: total 3.6GB, used 21.0MB (0.6%), free 3.4GB (93.8%)	used space=21995520B;3097119948;3484259942;0;3871399936 used space (pct.)=0.6%;80;90;0;100
+1634396591	Jenkins Server DR 172.23.20.21	HD TMP Partition	OK	1	HARD	0.109	0.001	OK: /tmp: total 3.6GB, used 21.0MB (0.6%), free 3.4GB (93.8%)	used space=21995520B;3097119948;3484259942;0;3871399936 used space (pct.)=0.6%;80;90;0;100
+1634396591	ELK Server UAT 172.21.20.80	HD TMP Partition	OK	1	HARD	0.151	0.000	OK: /tmp: total 3.6GB, used 14.9MB (0.4%), free 3.4GB (94.0%)	used space=15642624B;3097119948;3484259942;0;3871399936 used space (pct.)=0.4%;80;90;0;100
+1634396589	BOP Server PROD 172.25.20.62	NFS Mount Point Status	CRITICAL	1	SOFT	3.015	0.001	Connection refused or timed out	
+1634396590	DNS-Mail Server Prod 172.25.20.55	HD VAR Partition	CRITICAL	1	SOFT	2.067	0.001	Connection refused or timed out	
+1634396592	MYSQL-DB Server DR 172.23.20.83	HD Root Partition	OK	1	HARD	0.085	0.000	OK: /: total 7.2GB, used 4.5GB (61.8%), free 2.4GB (32.8%)	used space=4783771648B;6194285772;6968571494;0;7742857216 used space (pct.)=61.8%;80;90;0;100
+1634396592	Middleware Server UAT 172.21.20.70	Swap plus RAM	OK	1	HARD	0.147	0.000	OK MEMORY:::: Total: 15884 MB - Used: 560 MB - 3.53% used --- SWAP:::: Used: 0 MB - 0.00% used  :	USED=588058624B;;;; TOTAL=16656404480B;;;; SWAP_USED=0B;;;; SWAP_TOTAL=8002727936B;;;; MEM_USED_PCT=3.53%;;;; SWAP_USED_PCT=0.00%;;;;
+1634396589	BOP Server DR 172.23.20.62	PING	OK	1	HARD	4.023	0.001	PING OK - Packet loss = 0%, RTA = 2.28 ms	rta=2.282000ms;600.000000;800.000000;0.000000 pl=0%;60;80;0
+1634396590	CDN-Server PROD 172.25.20.77	HD Root Partition	CRITICAL	1	SOFT	3.017	0.001	Connection refused or timed out	
+1634396591	EMI-Widget-Server-Prod 172.25.20.71	HD Root Partition	CRITICAL	1	SOFT	2.066	0.000	Connection refused or timed out	
+1634396593	Mongo-DB Server DR 172.23.20.42	Swap plus RAM	OK	1	HARD	0.113	0.000	OK MEMORY:::: Total: 5804 MB - Used: 915 MB - 15.77% used --- SWAP:::: Used: 0 MB - 0.00% used  :	USED=959766528B;;;; TOTAL=6086770688B;;;; SWAP_USED=0B;;;; SWAP_TOTAL=8002727936B;;;; MEM_USED_PCT=15.77%;;;; SWAP_USED_PCT=0.00%;;;;
+1634396593	Payment Switch Server- UAT 172.21.20.85	Apache CPU n MEM load	OK	1	HARD	0.164	0.001	OK  CPU: 0.0% MEM: 0.0% over 0 processes	proc=0 mem=0.0% cpu=0.0% rss=0.0KB vsz=0.0KB

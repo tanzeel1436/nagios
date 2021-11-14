@@ -1,0 +1,179 @@
+#!/usr/bin/perl -w
+
+############################################################################
+#
+# check_memory - Checks physical, swap, or total memory on your system.
+#
+# Version 1.0.0.0, Copyright (c) 2004 Gary Danko <gary@hekal.org>
+#
+# Notes:
+#   Initial version requires the Linux 'free' command.
+#
+# License Information:
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+############################################################################
+
+require 5.004;
+use POSIX;
+use strict;
+use diagnostics;
+use Getopt::Long;
+use vars qw($opt_t $opt_w $opt_c $opt_V $opt_h $PROGNAME);
+use lib "/usr/local/nagios/libexec";
+use utils qw($TIMEOUT %ERRORS &print_revision &support &usage);
+
+my $state;			# Plugin state, to be returned to Nagios
+my $measurement;		# Determines what to extract from the 'free' command
+my $memTotal;			# Total memory
+my $memUsed;			# Memory used
+my $memFree;			# Memory free
+my $memType;			# For plugin output
+my $percentFree;		# Percent of memory free
+my $percentUsed;		# Percent of memory used
+
+sub print_help ();
+sub print_usage ();
+
+$PROGNAME = "check_memory";
+
+#$ENV{'PATH'}='';
+#$ENV{'BASH_ENV'}='';
+#$ENV{'ENV'}='';
+
+Getopt::Long::Configure();
+GetOptions
+	('h'	=> \$opt_h, 'help'	 => \$opt_h,
+		 'V'	=> \$opt_V, 'version'	 => \$opt_V,
+		 	 'w=s'	=> \$opt_w, 'warning=s'	 => \$opt_w,
+			 	 'c=s'	=> \$opt_c, 'critical=s' => \$opt_c,
+				 	 't=s'	=> \$opt_t, 'type=s'	 => \$opt_t);
+
+					 if ($opt_V)
+					 	{ print_revision($PROGNAME,'$Revision: 1.0.0.0 $');
+							exit $ERRORS{'OK'};
+								}
+
+								if ($opt_h)
+									{ print_help();
+										exit $ERRORS{'OK'};
+											}
+
+											# Validate TYPE
+											($opt_t) || ($opt_t = shift) || ($opt_t = "total");
+											my $type = $1 if ($opt_t =~ /^(physical|swap|total)$/);
+											($type) || usage("Invalid entry for TYPE\n");
+											#($type) || print "Invalid entry for TYPE\n"; print_usage();exit $ERRORS{'UNKNOWN'};
+
+											# Validate WARNING
+											($opt_w) || ($opt_w = shift) || ($opt_w = 30);
+											my $warn = $1 if ($opt_w =~ /^([0-9]{1,2}|100)$/);
+											($warn) || usage("Invalid entry for WARNING\n");
+											#($warn) || print "Invalid entry for WARNING\n"; print_usage();exit $ERRORS{'UNKNOWN'};
+
+											# Validate CRITICAL
+											($opt_c) || ($opt_c = shift) || ($opt_c = 10);
+											my $crit = $1 if ($opt_c =~ /^([0-9]{1,2}|100)$/);
+											($crit) || usage("Invalid entry for CRITICAL\n");
+											#($crit) || print "Invalid entry for CRITICAL\n"; print_usage();exit $ERRORS{'UNKNOWN'};
+
+											# Is WARNING less than CRITICAL?
+											unless ( $warn > $crit ) {
+												usage("WARNING should be greater than CRITICAL\n"); }
+												#	print "WARNING should be greater than CRITICAL\n";
+												#	print_usage();
+												#	exit $ERRORS{'UNKNOWN'};
+												#	}
+
+												if ($opt_t eq "physical")
+													{ $measurement = "Mem"; $memType = "Physical"; }
+
+													if ($opt_t eq "swap")
+														{ $measurement = "Swap";  $memType = "Swap"; }
+
+														if ($opt_t eq "total")
+															{ $measurement = "Total"; $memType = "Total"; }
+
+															# Begin processing section
+															$memTotal = `/usr/bin/free -kot | grep $measurement | /bin/awk '{print \$2}'`;
+															$memTotal = $memTotal / 1000;
+															$memTotal = `printf "%.2f" $memTotal`;
+															chomp $memTotal;
+
+															$memUsed = `/usr/bin/free -kot | grep $measurement | /bin/awk '{print \$3}'`;
+															$memUsed = $memUsed / 1000;
+															$memUsed = `printf "%.2f" $memUsed`;
+															chomp $memUsed;
+
+															$memFree = `/usr/bin/free -kot | grep $measurement | /bin/awk '{print \$4}'`;
+															$memFree = $memFree / 1000;
+															$memFree = `printf "%.2f" $memFree`;
+															chomp $memFree;
+
+															$percentFree = $memFree / $memTotal * 100;
+															$percentFree = `printf "%.0f" $percentFree`;
+															chomp $percentFree;
+
+															$percentUsed = 100 - $percentFree;
+															chomp $percentFree;
+
+															if ($percentFree < $opt_c)
+																{ $state = "CRITICAL";
+																	print "$memType Memory $state: Total: $memTotal MB - Used: $memUsed MB ($percentUsed%) - Free: $memFree MB ($percentFree%)\n";
+																		exit $ERRORS{"CRITICAL"};
+																			}
+
+																			elsif ($percentFree < $opt_w)
+																				{ $state = "WARNING";
+																					print "$memType Memory $state: Total: $memTotal MB - Used: $memUsed MB ($percentUsed%) - Free: $memFree MB ($percentFree%)\n";
+																						exit $ERRORS{"WARNING"};
+																							}
+
+																							else
+																								{ $state = "OK";
+																									print "$memType Memory $state: Total: $memTotal MB - Used: $memUsed MB ($percentUsed%) - Free: $memFree MB ($percentFree%)\n";
+																										exit $ERRORS{"OK"};
+																											}
+																											# End processing section
+
+																											sub print_usage () {
+																												print "Usage: $PROGNAME -t [physical|swap|total] -w limit -c limit\n";
+																													print "       $PROGNAME [-v|--version]\n";
+																														print "       $PROGNAME [-h|--help]\n";
+																														}
+
+																														sub print_help () {
+																															print_revision($PROGNAME,'$Revision: 1.0.0.0 $');
+																																print "Copyright (c) 2004 Gary Danko
+
+																																Perl Check Memory plugin for Nagios
+																																";
+																																	print_usage();
+																																		print "
+																																		Required Arguments:
+																																		 -t, --type=[physical|swap|total]
+																																		    Measure either physical, swap, or total (physical + swap) memory (Default: Total)
+																																				 -w, --warning=PERCENT
+																																				    Exit with WARNING status is less than PERCENT of total memory is free (Default: 30%)
+																																						 -c, --critical=PERCENT
+																																						    Exit with CRITICAL status is less than PERCENT of total memory is free (Default: 10%)
+
+																																								Example: $PROGNAME --type=physical --warning=50 --critical=25
+
+																																								";   
+																																								   support();
+																																									 }
+
+

@@ -1,0 +1,83 @@
+#!/bin/bash
+#
+# Process monitor plugin for Nagios
+# Modified by Tanzeel Iqbal <tanzeel_1436@hotmail.com>
+# Last Modified: 13-07-2013
+#
+# Usage: ./check_any_process
+#
+# Description:
+# This script couldn't be simpler than it is. It just checks to see
+# whether a predefined list of processes is up and running.
+#
+# Limitations:
+#   This script should work properly on all implementations of Linux, Solaris OS
+#
+# Output:
+# If there one of the processes is down, a CRIT is issued.
+#
+
+# You may have to change this, depending on where you installed your
+# Nagios plugins
+PROGNAME="check_any_process"
+PATH="/usr/bin:/usr/sbin:/bin:/sbin"
+LIBEXEC="/usr/local/nagios/libexec"
+. $LIBEXEC/utils.sh
+
+
+### DEFINING THE PROCESS LIST as we mention Asterisk process to monitor ###
+LIST="sshd crond nrpe"
+
+
+### REQUISITE NAGIOS COMMAND LINE STUFF ###
+
+print_usage() {
+        echo "Usage: $PROGNAME"
+        echo "Usage: $PROGNAME --help"
+}
+
+print_help() {
+        echo ""
+        print_usage
+        echo ""
+        echo "Basic processes list monitor plugin for Nagios"
+        echo ""
+        echo "This plugin not developped by the Nagios Plugin group."
+        echo "Please do not e-mail them for support on this plugin, since"
+        echo "they won't know what you're talking about :P"
+        echo ""
+        echo "For contact info, read the plugin itself..."
+}
+
+while test -n "$1"
+do
+        case "$1" in
+          --help) print_help; exit $STATE_OK;;
+          -h) print_help; exit $STATE_OK;;
+          *) print_usage; exit $STATE_UNKNOWN;;
+        esac
+done
+
+### FINALLY THE MAIN ROUTINE ###
+
+COUNT="0"
+DOWN=""
+
+for PROCESS in `echo $LIST`
+do
+        if [ `ps aux | grep -i $PROCESS | grep -v grep | wc -l` -lt 1 ]
+        then
+                let COUNT=$COUNT+1
+                DOWN="$DOWN $PROCESS"
+        fi
+done
+if [ $COUNT -gt 0 ]
+then
+        echo "CRITICAL - $COUNT processes not running: $DOWN "
+        exit $STATE_CRITICAL
+fi
+
+# Nothing caused us to exit early, so we're okay.
+echo "OK - All Services are running!" $LIST
+exit $STATE_OK
+

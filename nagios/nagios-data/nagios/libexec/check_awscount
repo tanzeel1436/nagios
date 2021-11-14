@@ -1,0 +1,16 @@
+#!/bin/bash
+yesterday="`date -d yesterday +%d-%m-%Y`"
+ 
+#Local="$(find /recording/web-LHE/Audio/ -type f -iname "$yesterday.tar.gz" |wc -l)"
+#AWS="$(/usr/local/bin/aws s3 ls s3://lahore-recording/recording/web-LHE/  --recursive |grep $yesterday.tar.gz |wc -l)"
+ 
+Local="$(cat /var/log/sync/AWS-Local.log)"
+AWS="$(cat /var/log/sync/AWS-remote.log)"
+
+if [ "$Local" == "$AWS" ]; then
+    echo " OK: Local files $Local and AWS Uploaded files = $AWS are equal" & "date" 
+    exit 0
+else
+    echo " CRITICAL: Local files $Local and AWS Uploaded files = $AWS are not equal" & "date"
+    exit 2
+fi

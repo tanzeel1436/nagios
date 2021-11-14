@@ -1,0 +1,72 @@
+#!/bin/bash
+
+
+#########Program to calculate NTP offsets with NTP servers defined and then decide to whom it will sync server time
+#########
+######### NTP Servers Available
+
+server1=10.90.0.1
+server2=10.80.0.1
+
+######## Calculating offsets
+
+offset_server1=$(/usr/sbin/ntpdate -q $server1 | sed -n '2p' | awk {'print $10'})
+offset_server2=$(/usr/sbin/ntpdate -q $server2 | sed -n '2p' | awk {'print $10'})
+
+####### Converting offsets from floating points to integers
+
+offsets_adjusted1=${offset_server1%.*}
+offsets_adjusted2=${offset_server2%.*}
+
+unknown_string='no server suitable for synchronization found';
+
+###### Check for offset in range between -30 & +30
+
+	if
+        [[ $unknown_string == *$offset_server1* ]] && [[ $unknown_string == *$offset_server2* ]];
+        then
+        echo "CRITICAL - ntp servers not responding. " 
+        exit 2;
+        fi
+	
+	if 
+
+	[[ $offsets_adjusted1 -gt 30 || $offsets_adjusted1 -lt -30 ]] && [[ $offsets_adjusted2 -gt 30 || $offsets_adjusted2 -lt -30 ]]; 
+
+	then
+
+
+	echo "CRITICAL - ntp offsets are too high from both servers $server1 and $server2 so sync avoided." 
+        exit 2;
+
+	fi
+
+	if 
+	[[ $offsets_adjusted1 -le 30 && $offsets_adjusted1 -ge -30 ]]
+
+	
+	then
+
+	/usr/sbin/ntpdate -u $server1 
+	RESULT=$?
+	if [ $RESULT -eq 0 ]; then
+	echo "OK - ntp sync with $server1" 
+	exit 0
+	
+	fi
+	fi
+	
+	if 
+
+	[[ $offsets_adjusted2 -le 30 && $offsets_adjusted2 -ge -30 ]]
+ 
+	
+	then 
+
+	/usr/sbin/ntpdate -u $server2 
+	RESULT=$?
+        if [ $RESULT -eq 0 ]; then
+	echo "OK - ntp sync with $server2" 
+	exit 0;
+	fi	
+	fi

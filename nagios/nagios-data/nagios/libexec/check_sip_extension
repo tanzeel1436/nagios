@@ -1,0 +1,29 @@
+#!/usr/bin/perl
+
+if ($ARGV < 0)
+{
+print "No extension given:\n";
+exit(1);}
+
+$ext= $ARGV[0];
+#print "$ext";
+$read= `/usr/sbin/asterisk -rx "sip show peer $ext" | tail -40 | grep Addr`;
+
+if ($read =~ /: 10./){
+        $state = 'OK';
+print "$state: $read\n";
+exit(0);}
+
+elsif ($read =~ /: 0.0.0.0/){
+        $state = 'CRITICAL';
+print "$state: $read\n";
+exit(2);}
+
+elsif  ($read =~ /:   No peer/){
+        $state = 'WARNING';
+print "$state: $read\n";
+exit(1);}
+else {
+        print "CRITICAL: Peer $ext not Register.\n";
+exit(2);}
+

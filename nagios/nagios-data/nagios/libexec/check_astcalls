@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Polls the asterisk server and returns active channel information
+
+
+out=`/usr/sbin/asterisk -rx "show channels" | tail -3 | grep active | sed '$!N;s/\n/ /'`
+
+mesg="Asterisk channels: "
+	rc=0
+	if [ "$?" -ne 0 ]
+	then
+		mesg="Error in Asterisk check"
+		rc=3
+	fi
+	echo "$mesg$out"
+	exit $rc

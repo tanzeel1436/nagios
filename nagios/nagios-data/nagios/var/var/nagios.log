@@ -1,0 +1,211 @@
+[1634396523] Nagios 4.3.4 starting... (PID=30)
+[1634396523] Local time is Sat Oct 16 15:02:03 UTC 2021
+[1634396523] LOG VERSION: 2.0
+[1634396523] qh: Socket '/usr/local/nagios/var/rw/nagios.qh' successfully initialized
+[1634396523] qh: core query handler registered
+[1634396523] nerd: Channel hostchecks registered successfully
+[1634396523] nerd: Channel servicechecks registered successfully
+[1634396523] nerd: Channel opathchecks registered successfully
+[1634396523] nerd: Fully initialized and ready to rock!
+[1634396523] wproc: Successfully registered manager as @wproc with query handler
+[1634396523] wproc: Registry request: name=Core Worker 36;pid=36
+[1634396523] wproc: Registry request: name=Core Worker 33;pid=33
+[1634396523] wproc: Registry request: name=Core Worker 34;pid=34
+[1634396523] wproc: Registry request: name=Core Worker 32;pid=32
+[1634396523] WARNING: The normal_check_interval attribute is deprecated and will be removed in future versions. Please use check_interval instead.
+[1634396523] WARNING: The retry_check_interval attribute is deprecated and will be removed in future versions. Please use retry_interval instead.
+[1634396523] WARNING: The normal_check_interval attribute is deprecated and will be removed in future versions. Please use check_interval instead.
+[1634396523] WARNING: The retry_check_interval attribute is deprecated and will be removed in future versions. Please use retry_interval instead.
+[1634396523] WARNING: The normal_check_interval attribute is deprecated and will be removed in future versions. Please use check_interval instead.
+[1634396523] WARNING: The retry_check_interval attribute is deprecated and will be removed in future versions. Please use retry_interval instead.
+[1634396523] WARNING: The normal_check_interval attribute is deprecated and will be removed in future versions. Please use check_interval instead.
+[1634396523] WARNING: The retry_check_interval attribute is deprecated and will be removed in future versions. Please use retry_interval instead.
+[1634396523] WARNING: The normal_check_interval attribute is deprecated and will be removed in future versions. Please use check_interval instead.
+[1634396523] WARNING: The retry_check_interval attribute is deprecated and will be removed in future versions. Please use retry_interval instead.
+[1634396524] Successfully launched command file worker with pid 52
+[1634396527] SERVICE ALERT: TMS System 172.25.20.25;HD VAR/LOG Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396529] HOST ALERT: API-GW Server PROD 172.25.20.35;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.35)
+[1634396530] HOST ALERT: TMS System 172.25.20.25;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.25)
+[1634396532] SERVICE ALERT: API-GW Server PROD 172.25.20.35;PING;CRITICAL;SOFT;1;CRITICAL - Host Unreachable (172.25.20.35)
+[1634396534] SERVICE ALERT: API-GW-MYSQL PROD 172.25.20.65;HD Root Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396534] HOST ALERT: API-GW-MYSQL PROD 172.25.20.65;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.65)
+[1634396534] SERVICE ALERT: API-Server PROD 172.25.20.82;HD Root Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396534] SERVICE ALERT: MYSQL-DB Server DR 172.23.20.83;MySql - Slave SQL Running;CRITICAL;SOFT;1;CRITICAL - 172.23.20.83 - Slave_SQL_Running No
+[1634396535] SERVICE ALERT: CDN-Server PROD 172.25.20.77;TCP and UDP Connections;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396535] SERVICE ALERT: BOP Server PROD 172.25.20.62;HD Data Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396535] SERVICE ALERT: CDN-Server PROD 172.25.20.77;Check Traffic;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396536] SERVICE ALERT: EMI-Widget-Server-Prod 172.25.20.71;Apache CPU n MEM load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396536] SERVICE ALERT: EMI-Widget-Server-Prod 172.25.20.71;Total Processes;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396536] SERVICE ALERT: Nagios Server DR 172.23.20.50;HD Home Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396537] SERVICE ALERT: MYSQL-DB Server PROD 172.25.20.83;HD VAR/LOG Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396537] SERVICE ALERT: IVR-Server-prod 172.25.20.44;Total Processes;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396537] SERVICE ALERT: IVR-Server-prod 172.25.20.44;Apache CPU and MEM Load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396537] HOST ALERT: API-Server PROD 172.25.20.82;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.82)
+[1634396538] HOST ALERT: CDN-Server PROD 172.25.20.77;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.77)
+[1634396538] HOST ALERT: BOP Server PROD 172.25.20.62;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.62)
+[1634396538] SERVICE ALERT: Mongo-DB Server PROD 172.25.20.42;HD Home Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396538] SERVICE ALERT: PBX-Server-Prod 172.25.20.74;HD Root Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396539] SERVICE ALERT: Payment-Switch-Srv-PROD 172.25.20.85;HD VAR Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396539] SERVICE ALERT: TMS System 172.25.20.25;HD VAR/LOG/AUDIT Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396539] HOST ALERT: EMI-Widget-Server-Prod 172.25.20.71;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.71)
+[1634396540] HOST ALERT: MYSQL-DB Server PROD 172.25.20.83;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.83)
+[1634396540] SERVICE ALERT: API-GW Server PROD 172.25.20.35;Swap plus RAM;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396540] HOST ALERT: IVR-Server-prod 172.25.20.44;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.44)
+[1634396540] SERVICE ALERT: API-GW-MYSQL PROD 172.25.20.65;HD TMP Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396540] SERVICE ALERT: API-Server PROD 172.25.20.82;HD TMP Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396541] HOST ALERT: Mongo-DB Server PROD 172.25.20.42;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.42)
+[1634396541] HOST ALERT: PBX-Server-Prod 172.25.20.74;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.74)
+[1634396541] SERVICE ALERT: BOP Server PROD 172.25.20.62;HD Home Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396541] SERVICE ALERT: CDN-Server PROD 172.25.20.77;Current Users;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396541] SERVICE ALERT: CDN-Server PROD 172.25.20.77;Total Processes;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396541] SERVICE ALERT: MYSQL-DB Server DR 172.23.20.83;MySql - Total Records Status;CRITICAL;SOFT;1;Master: 83519552 Slave: 56611160
+[1634396542] HOST ALERT: Payment-Switch-Srv-PROD 172.25.20.85;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.85)
+[1634396542] SERVICE ALERT: EMI-Widget-Server-Prod 172.25.20.71;CPU Stats;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396543] SERVICE ALERT: Nagios Server DR 172.23.20.50;HD Root Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396543] SERVICE ALERT: IVR-Server-prod 172.25.20.44;Asterisk CPU n MEM load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396543] SERVICE ALERT: MYSQL-DB Server PROD 172.25.20.83;HD VAR/LOG/AUDIT Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396544] SERVICE ALERT: PBX-Server-Prod 172.25.20.74;Important TCP Services Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396544] SERVICE ALERT: Mongo-DB Server PROD 172.25.20.42;HD Root Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396545] SERVICE ALERT: Payment-Switch-Srv-PROD 172.25.20.85;HD VAR/LOG Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396546] SERVICE ALERT: CDN-Server DR 172.23.20.77;HD Data Partition;CRITICAL;SOFT;1;CRITICAL: /mnt: total 98.3GB, used 92.5GB (94.1%>90%), free 771.8MB (0.8%)
+[1634396547] SERVICE ALERT: TMS System 172.25.20.25;Important TCP Services Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396547] SERVICE ALERT: API-GW Server PROD 172.25.20.35;Apache CPU n MEM load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396547] SERVICE ALERT: API-GW Server PROD 172.25.20.35;TCP and UDP Connections;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396548] SERVICE ALERT: API-GW-MYSQL PROD 172.25.20.65;HD VAR Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396549] SERVICE ALERT: BOP Server PROD 172.25.20.62;HD Root Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396549] SERVICE ALERT: API-Server PROD 172.25.20.82;HD VAR Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396549] SERVICE ALERT: CDN-Server PROD 172.25.20.77;Disk I/O;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396550] SERVICE ALERT: DNS-Mail Server Prod 172.25.20.55;CPU Stats;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396550] HOST ALERT: TMS System 172.25.20.25;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.25)
+[1634396550] HOST ALERT: API-GW Server PROD 172.25.20.35;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.35)
+[1634396550] SERVICE ALERT: Payment-Switch-Srv-DR 172.23.20.85;Important TCP Services Status;CRITICAL;SOFT;1;CRITICAL - 1 processes not running:  psprod
+[1634396551] SERVICE ALERT: Nagios Server DR 172.23.20.50;HD TMP Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396551] SERVICE ALERT: EMI-Widget-Server-Prod 172.25.20.71;Check Traffic;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396551] SERVICE ALERT: IVR-Server-prod 172.25.20.44;CPU Stats;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396551] HOST ALERT: API-GW-MYSQL PROD 172.25.20.65;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.65)
+[1634396552] SERVICE ALERT: Mongo-DB Server PROD 172.25.20.42;HD TMP Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396552] SERVICE ALERT: MYSQL-DB Server PROD 172.25.20.83;Important TCP Services Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396552] HOST ALERT: API-Server PROD 172.25.20.82;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.82)
+[1634396553] SERVICE ALERT: PBX-Server-Prod 172.25.20.74;MYSQL CPU n MEM load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396553] HOST ALERT: DNS-Mail Server Prod 172.25.20.55;DOWN;SOFT;1;CRITICAL - Host Unreachable (172.25.20.55)
+[1634396553] SERVICE ALERT: TMS System 172.25.20.25;PING;CRITICAL;SOFT;1;CRITICAL - Host Unreachable (172.25.20.25)
+[1634396553] SERVICE ALERT: API-GW Server PROD 172.25.20.35;CPU Stats;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396553] SERVICE ALERT: API-GW Server PROD 172.25.20.35;Total Processes;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396554] HOST ALERT: EMI-Widget-Server-Prod 172.25.20.71;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.71)
+[1634396554] SERVICE ALERT: Payment-Switch-Srv-PROD 172.25.20.85;HD VAR/LOG/AUDIT Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396554] SERVICE ALERT: API-GW-MYSQL PROD 172.25.20.65;HD VAR/LOG Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396555] HOST ALERT: MYSQL-DB Server PROD 172.25.20.83;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.83)
+[1634396555] SERVICE ALERT: API-Server PROD 172.25.20.82;HD VAR/LOG Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396556] SERVICE ALERT: BOP Server PROD 172.25.20.62;HD TMP Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396556] HOST ALERT: PBX-Server-Prod 172.25.20.74;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.74)
+[1634396556] SERVICE ALERT: DNS-Mail Server Prod 172.25.20.55;Check Traffic;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396557] SERVICE ALERT: CDN-Server PROD 172.25.20.77;Docker CPU and MEM Load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396557] SERVICE ALERT: Payment-Switch-Srv-PROD 172.25.20.85;HD TMP Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396557] HOST ALERT: Payment-Switch-Srv-PROD 172.25.20.85;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.85)
+[1634396557] SERVICE ALERT: EMI-Widget-Server-Prod 172.25.20.71;Current Users;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396558] SERVICE ALERT: Nagios Server DR 172.23.20.50;HD VAR Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396558] SERVICE ALERT: IVR-Server-prod 172.25.20.44;Check Traffic;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396558] SERVICE ALERT: MYSQL-DB Server PROD 172.25.20.83;MYSQLD Performance;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396559] SERVICE ALERT: Mongo-DB Server PROD 172.25.20.42;HD Data Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396559] SERVICE ALERT: Mongo-DB Server PROD 172.25.20.42;HD VAR Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396559] HOST ALERT: BOP Server PROD 172.25.20.62;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.62)
+[1634396559] SERVICE ALERT: PBX-Server-Prod 172.25.20.74;PING;CRITICAL;SOFT;1;CRITICAL - Host Unreachable (172.25.20.74)
+[1634396560] HOST ALERT: CDN-Server PROD 172.25.20.77;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.77)
+[1634396560] SERVICE ALERT: Payment-Switch-Srv-PROD 172.25.20.85;Important TCP Services Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396561] SERVICE ALERT: TMS System 172.25.20.25;Swap plus RAM;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396561] HOST ALERT: IVR-Server-prod 172.25.20.44;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.44)
+[1634396562] SERVICE ALERT: API-GW-MYSQL PROD 172.25.20.65;HD VAR/LOG/AUDIT Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396562] SERVICE ALERT: API-GW-MYSQL PROD 172.25.20.65;HD Home Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396562] SERVICE ALERT: API-GW Server PROD 172.25.20.35;Check Traffic;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396562] HOST ALERT: Mongo-DB Server PROD 172.25.20.42;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.42)
+[1634396562] SERVICE ALERT: BOP Server PROD 172.25.20.62;HD VAR Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396562] SERVICE ALERT: BOP Server PROD 172.25.20.62;Disk I/O;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396563] SERVICE ALERT: API-Server PROD 172.25.20.82;HD VAR/LOG/AUDIT Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396563] SERVICE ALERT: CDN-Server PROD 172.25.20.77;Docker Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396563] SERVICE ALERT: CDN-Server PROD 172.25.20.77;CPU Stats;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396563] SERVICE ALERT: MYSQL-DB Server DR 172.23.20.83;DataBase Sync Backup Status;WARNING;SOFT;1;WARNING: File /var/log/sync/sync_DB-backup.log is 8090.295 hours old, threhsold is <=1 hours.
+[1634396564] SERVICE ALERT: IVR-Server-prod 172.25.20.44;Disk I/O;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396564] SERVICE ALERT: IVR-Server-prod 172.25.20.44;TCP and UDP Connections;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396565] SERVICE ALERT: Nagios Server DR 172.23.20.50;HD VAR/LOG Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396565] SERVICE ALERT: DNS-Mail Server Prod 172.25.20.55;Disk I/O;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396565] SERVICE ALERT: EMI-Widget-Server-Prod 172.25.20.71;DOCKER CPU and MEM Load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396565] HOST ALERT: API-GW Server PROD 172.25.20.35;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.35)
+[1634396565] SERVICE ALERT: Mongo-DB Server PROD 172.25.20.42;HD VAR/LOG Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396566] SERVICE ALERT: MYSQL-DB Server PROD 172.25.20.83;MYSQLD Total connections;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396566] SERVICE ALERT: API-GW Server DR 172.23.20.35;DOCKER Status;UNKNOWN;SOFT;1;UNKNOWN: Cannot access docker socket file. User ID=0, socket file=/var/run/docker.sock
+[1634396567] SERVICE ALERT: PBX-Server-Prod 172.25.20.74;SIP Trunk Status Call Center;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396568] SERVICE ALERT: Payment-Switch-Srv-PROD 172.25.20.85;JAVA CPU and MEM Load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396568] SERVICE ALERT: TMS System 172.25.20.25;TCP and UDP Connections;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396568] HOST ALERT: DNS-Mail Server Prod 172.25.20.55;DOWN;SOFT;2;CRITICAL - Host Unreachable (172.25.20.55)
+[1634396568] SERVICE ALERT: API-GW Server PROD 172.25.20.35;Current Users;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396570] SERVICE ALERT: API-Server PROD 172.25.20.82;Important TCP Services Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396570] SERVICE ALERT: API-Server PROD 172.25.20.82;HD Home Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396570] SERVICE ALERT: API-GW-MYSQL PROD 172.25.20.65;Important TCP Services Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396570] SERVICE ALERT: PBX-Server-Prod 172.25.20.74;Disk I/O;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396571] SERVICE ALERT: BOP Server PROD 172.25.20.62;HD VAR/LOG Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396571] SERVICE ALERT: CDN-Server PROD 172.25.20.77;HD CDN Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396571] HOST ALERT: TMS System 172.25.20.25;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.25)
+[1634396571] SERVICE ALERT: DNS-Mail Server Prod 172.25.20.55;HD Home Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396572] SERVICE ALERT: EMI-Widget-Server-Prod 172.25.20.71;DOCKER Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396572] SERVICE ALERT: Nagios Server DR 172.23.20.50;HD VAR/LOG/AUDIT Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396573] HOST ALERT: API-GW-MYSQL PROD 172.25.20.65;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.65)
+[1634396573] HOST ALERT: API-Server PROD 172.25.20.82;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.82)
+[1634396573] SERVICE ALERT: IVR-Server-prod 172.25.20.44;HD Home Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396573] SERVICE ALERT: PBX-Server-Prod 172.25.20.74;Swap plus RAM;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396573] HOST ALERT: PBX-Server-Prod 172.25.20.74;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.74)
+[1634396573] SERVICE ALERT: MYSQL-DB Server PROD 172.25.20.83;MySql -Service Running;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396574] HOST ALERT: BOP Server PROD 172.25.20.62;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.62)
+[1634396574] SERVICE ALERT: Mongo-DB Server PROD 172.25.20.42;HD VAR/LOG/AUDIT Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396574] SERVICE ALERT: TMS System 172.25.20.25;Total Processes;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396575] HOST ALERT: EMI-Widget-Server-Prod 172.25.20.71;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.71)
+[1634396575] SERVICE ALERT: Payment-Switch-Srv-PROD 172.25.20.85;PING;CRITICAL;SOFT;1;CRITICAL - Host Unreachable (172.25.20.85)
+[1634396576] SERVICE ALERT: API-GW Server PROD 172.25.20.35;DOCKER CPU and MEM Load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396576] HOST ALERT: IVR-Server-prod 172.25.20.44;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.44)
+[1634396576] HOST ALERT: MYSQL-DB Server PROD 172.25.20.83;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.83)
+[1634396576] SERVICE ALERT: API-Server PROD 172.25.20.82;NFS Mount Point Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396576] SERVICE ALERT: API-GW-MYSQL PROD 172.25.20.65;PING;CRITICAL;SOFT;1;CRITICAL - Host Unreachable (172.25.20.65)
+[1634396577] HOST ALERT: Mongo-DB Server PROD 172.25.20.42;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.42)
+[1634396577] SERVICE ALERT: BOP Server PROD 172.25.20.62;HD VAR/LOG/AUDIT Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396577] SERVICE ALERT: MYSQL-DB Server DR 172.23.20.83;HD Data Partition;WARNING;SOFT;1;Warning: /mnt: total 147.4GB, used 122.2GB (82.9%>80%), free 17.7GB (12.0%)
+[1634396578] SERVICE ALERT: CDN-Server PROD 172.25.20.77;HD Data Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396578] SERVICE ALERT: EMI-Widget-Server-Prod 172.25.20.71;Disk I/O;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396578] HOST ALERT: Payment-Switch-Srv-PROD 172.25.20.85;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.85)
+[1634396579] SERVICE ALERT: DNS-Mail Server Prod 172.25.20.55;HD Root Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396579] SERVICE ALERT: IVR-Server-prod 172.25.20.44;HD Root Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396579] SERVICE ALERT: MYSQL-DB Server PROD 172.25.20.83;PING;CRITICAL;SOFT;1;CRITICAL - Host Unreachable (172.25.20.83)
+[1634396580] SERVICE ALERT: Nagios Server DR 172.23.20.50;Important TCP Services Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396580] SERVICE ALERT: Mongo-DB Server PROD 172.25.20.42;Important TCP Services Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396581] HOST ALERT: CDN-Server PROD 172.25.20.77;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.77)
+[1634396582] SERVICE ALERT: Payment-Switch-Srv-PROD 172.25.20.85;Swap plus RAM;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396582] SERVICE ALERT: PBX-Server-Prod 172.25.20.74;TCP and UDP Connections;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396583] SERVICE ALERT: API-GW Server PROD 172.25.20.35;DOCKER Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396584] SERVICE ALERT: API-GW-MYSQL PROD 172.25.20.65;Swap plus RAM;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396584] SERVICE ALERT: CDN-Server PROD 172.25.20.77;HD Home Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396585] SERVICE ALERT: BOP Server PROD 172.25.20.62;Important TCP Services Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396585] SERVICE ALERT: API-Server PROD 172.25.20.82;PING;CRITICAL;SOFT;1;CRITICAL - Host Unreachable (172.25.20.82)
+[1634396586] HOST ALERT: API-GW Server PROD 172.25.20.35;DOWN;SOFT;4;CRITICAL - Host Unreachable (172.25.20.35)
+[1634396586] SERVICE ALERT: DNS-Mail Server Prod 172.25.20.55;HD TMP Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396587] SERVICE ALERT: EMI-Widget-Server-Prod 172.25.20.71;HD Home Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396587] SERVICE ALERT: Nagios Server DR 172.23.20.50;Nagios CPU and MEM Load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396587] SERVICE ALERT: IVR-Server-prod 172.25.20.44;HD TMP Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396588] SERVICE ALERT: MYSQL-DB Server PROD 172.25.20.83;Swap plus RAM;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396588] SERVICE ALERT: MYSQL-DB Server PROD 172.25.20.83;Apache CPU n MEM load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396588] HOST ALERT: API-Server PROD 172.25.20.82;DOWN;SOFT;4;CRITICAL - Host Unreachable (172.25.20.82)
+[1634396589] SERVICE ALERT: PBX-Server-Prod 172.25.20.74;Total Processes;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396589] SERVICE ALERT: Mongo-DB Server PROD 172.25.20.42;PING;CRITICAL;SOFT;1;CRITICAL - Host Unreachable (172.25.20.42)
+[1634396589] HOST ALERT: DNS-Mail Server Prod 172.25.20.55;DOWN;SOFT;3;CRITICAL - Host Unreachable (172.25.20.55)
+[1634396589] SERVICE ALERT: API-GW Server PROD 172.25.20.35;Disk I/O;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396590] SERVICE ALERT: Payment-Switch-Srv-PROD 172.25.20.85;TCP and UDP Connections;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396590] HOST ALERT: EMI-Widget-Server-Prod 172.25.20.71;DOWN;SOFT;4;CRITICAL - Host Unreachable (172.25.20.71)
+[1634396590] SERVICE ALERT: MYSQL-DB Server DR 172.23.20.83;MySql - Slave IO Running;CRITICAL;SOFT;1;CRITICAL - 172.23.20.83 - Slave_IO_Running No
+[1634396591] HOST ALERT: MYSQL-DB Server PROD 172.25.20.83;DOWN;SOFT;4;CRITICAL - Host Unreachable (172.25.20.83)
+[1634396591] SERVICE ALERT: API-GW-MYSQL PROD 172.25.20.65;TCP and UDP Connections;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396591] SERVICE ALERT: API-Server PROD 172.25.20.82;Apache CPU n MEM load;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396591] SERVICE ALERT: API-Server PROD 172.25.20.82;Swap plus RAM;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396592] SERVICE ALERT: BOP Server PROD 172.25.20.62;NFS Mount Point Status;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396592] HOST ALERT: PBX-Server-Prod 172.25.20.74;DOWN;SOFT;4;CRITICAL - Host Unreachable (172.25.20.74)
+[1634396592] HOST ALERT: Mongo-DB Server PROD 172.25.20.42;DOWN;SOFT;4;CRITICAL - Host Unreachable (172.25.20.42)
+[1634396592] SERVICE ALERT: DNS-Mail Server Prod 172.25.20.55;HD VAR Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396593] SERVICE ALERT: CDN-Server PROD 172.25.20.77;HD Root Partition;CRITICAL;SOFT;1;Connection refused or timed out
+[1634396593] HOST ALERT: Payment-Switch-Srv-PROD 172.25.20.85;DOWN;SOFT;4;CRITICAL - Host Unreachable (172.25.20.85)
+[1634396593] SERVICE ALERT: EMI-Widget-Server-Prod 172.25.20.71;HD Root Partition;CRITICAL;SOFT;1;Connection refused or timed out
